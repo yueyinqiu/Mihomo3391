@@ -1,0 +1,1149 @@
+warning: Git tree '/home/yueyinqiu/Desktop/Mihomo3391' is dirty
+checking outputs of '/nix/store/vldwvw5gkr7bxvzw5ykizixj96ydy1pq-vm-test-run-mihomo-dual-stack-uid.drv'...
+vm-test-run-mihomo-dual-stack-uid> [0.00s] Machine state will be reset. To keep it, pass --keep-machine-state
+vm-test-run-mihomo-dual-stack-uid> [0.00s] start all VLans
+vm-test-run-mihomo-dual-stack-uid> [0.01s] (finished: start all VLans, in 0.00 seconds)
+vm-test-run-mihomo-dual-stack-uid> [0.01s] Test will time out and terminate in 3600.0 seconds
+vm-test-run-mihomo-dual-stack-uid> [0.01s] run the VM test script
+vm-test-run-mihomo-dual-stack-uid> additionally exposed symbols:
+vm-test-run-mihomo-dual-stack-uid>     machine,
+vm-test-run-mihomo-dual-stack-uid>     vlan1,
+vm-test-run-mihomo-dual-stack-uid>     start_all, test_script, machines, machines_qemu, machines_nspawn, vlans, driver, log, os, create_machine, subtest, run_tests, join_all, retry, serial_stdout_off, serial_stdout_on, polling_condition, BaseMachine, QemuMachine, NspawnMachine, t, debug, dump_machine_ssh
+vm-test-run-mihomo-dual-stack-uid> [0.01s] start all VMs
+vm-test-run-mihomo-dual-stack-uid> [0.01s] machine: starting vm
+vm-test-run-mihomo-dual-stack-uid> machine # Disk image does not exist, creating the virtualisation disk image...
+vm-test-run-mihomo-dual-stack-uid> machine # Formatting '/build/vm-state-machine/tmp.vjN1JyIp5n', fmt=raw size=1073741824
+vm-test-run-mihomo-dual-stack-uid> machine # mke2fs 1.47.4 (6-Mar-2025)
+vm-test-run-mihomo-dual-stack-uid> machine # Discarding device blocks:      0/262144             done
+vm-test-run-mihomo-dual-stack-uid> machine # Creating filesystem with 262144 4k blocks and 65536 inodes
+vm-test-run-mihomo-dual-stack-uid> machine # Filesystem UUID: 1fda5eed-50b8-4498-960b-3f2553a89bdb
+vm-test-run-mihomo-dual-stack-uid> machine # Superblock backups stored on blocks:
+vm-test-run-mihomo-dual-stack-uid> machine #    32768, 98304, 163840, 229376
+vm-test-run-mihomo-dual-stack-uid> machine # 
+vm-test-run-mihomo-dual-stack-uid> machine # Allocating group tables: 0/8   done
+vm-test-run-mihomo-dual-stack-uid> machine # Writing inode tables: 0/8   done
+vm-test-run-mihomo-dual-stack-uid> machine # Creating journal (8192 blocks): done
+vm-test-run-mihomo-dual-stack-uid> machine # Writing superblocks and filesystem accounting information: 0/8   done
+vm-test-run-mihomo-dual-stack-uid> machine # 
+vm-test-run-mihomo-dual-stack-uid> machine # Virtualisation disk image created.
+vm-test-run-mihomo-dual-stack-uid> machine # Starting virtiofs daemons...
+vm-test-run-mihomo-dual-stack-uid> [0.21s] machine: QEMU running (pid 46)
+vm-test-run-mihomo-dual-stack-uid> machine # [2026-11-05T15:35:02Z WARN  virtiofsd::passthrough] Failed to open file handle for the root node: Operation not permitted (os error 1)
+vm-test-run-mihomo-dual-stack-uid> machine # [2026-11-05T15:35:02Z WARN  virtiofsd::passthrough] File handles do not appear safe to use, disabling file handles altogether
+vm-test-run-mihomo-dual-stack-uid> machine # [2026-11-05T15:35:02Z INFO  virtiofsd] Waiting for vhost-user socket connection...
+vm-test-run-mihomo-dual-stack-uid> machine # [2026-11-05T15:35:02Z WARN  virtiofsd::passthrough] Failed to open file handle for the root node: Operation not permitted (os error 1)
+vm-test-run-mihomo-dual-stack-uid> machine # [2026-11-05T15:35:02Z WARN  virtiofsd::passthrough] File handles do not appear safe to use, disabling file handles altogether
+vm-test-run-mihomo-dual-stack-uid> machine # [2026-11-05T15:35:02Z INFO  virtiofsd] Waiting for vhost-user socket connection...
+vm-test-run-mihomo-dual-stack-uid> machine # [2026-11-05T15:35:02Z WARN  virtiofsd::passthrough] Failed to open file handle for the root node: Operation not permitted (os error 1)
+vm-test-run-mihomo-dual-stack-uid> machine # [2026-11-05T15:35:02Z WARN  virtiofsd::passthrough] File handles do not appear safe to use, disabling file handles altogether
+vm-test-run-mihomo-dual-stack-uid> machine # [2026-11-05T15:35:02Z INFO  virtiofsd] Waiting for vhost-user socket connection...
+vm-test-run-mihomo-dual-stack-uid> machine # [2026-11-05T15:35:02Z INFO  virtiofsd] Client connected, servicing requests
+vm-test-run-mihomo-dual-stack-uid> machine # [2026-11-05T15:35:02Z INFO  virtiofsd] Client connected, servicing requests
+vm-test-run-mihomo-dual-stack-uid> machine # [2026-11-05T15:35:02Z INFO  virtiofsd] Client connected, servicing requests
+vm-test-run-mihomo-dual-stack-uid> [0.21s] (finished: start all VMs, in 0.21 seconds)
+vm-test-run-mihomo-dual-stack-uid> [0.21s] machine: waiting for unit multi-user.target
+vm-test-run-mihomo-dual-stack-uid> [0.21s] machine: waiting for the VM to finish booting
+vm-test-run-mihomo-dual-stack-uid> machine # cSeaBIOS (version rel-1.17.0-0-gb52ca86e094d-prebuilt.qemu.org)
+vm-test-run-mihomo-dual-stack-uid> machine # 
+vm-test-run-mihomo-dual-stack-uid> machine # 
+vm-test-run-mihomo-dual-stack-uid> machine # iPXE (http://ipxe.org) 00:02.0 CA00 PCI2.10 PnP PMM+3EFCC750+3EF2C750 CA00
+vm-test-run-mihomo-dual-stack-uid> machine # Press Ctrl-B to configure iPXE (PCI 00:02.0)...
+vm-test-run-mihomo-dual-stack-uid> machine # 
+vm-test-run-mihomo-dual-stack-uid> machine # 
+vm-test-run-mihomo-dual-stack-uid> machine # 
+vm-test-run-mihomo-dual-stack-uid> machine # 
+vm-test-run-mihomo-dual-stack-uid> machine # iPXE (http://ipxe.org) 00:05.0 CB00 PCI2.10 PnP PMM 3EFCC750 3EF2C750 CB00
+vm-test-run-mihomo-dual-stack-uid> machine # Press Ctrl-B to configure iPXE (PCI 00:05.0)...
+vm-test-run-mihomo-dual-stack-uid> machine # 
+vm-test-run-mihomo-dual-stack-uid> machine # 
+vm-test-run-mihomo-dual-stack-uid> machine # Booting from ROM...
+vm-test-run-mihomo-dual-stack-uid> machine # Probing EDD (edd=off to disable)... ock[    0.000000] Linux version 6.18.60 (nixbld@localhost) (gcc (GCC) 16.2.0, GNU ld (GNU Binutils) 2.46) #1-NixOS SMP PREEMPT_DYNAMIC @1793362001
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.000000] Command line: console=ttyS0 console=tty0 panic=1 boot.panic_on_fail clocksource=acpi_pm root=fstab loglevel=7 net.ifnames=0 lsm=landlock,yama,bpf init=/nix/store/wsrlllf7r7l54q619lp4fx76hjj5wav5-nixos-system-machine-test/init regInfo=/nix/.ro-store/k4wi6y4h4rz7m3jz71k1s4qh17jq8qsk-closure-info/registration console=ttyS0,115200n8 console=tty0
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.000000] BIOS-provided physical RAM map:
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.000000] BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.000000] BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.000000] BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff] reserved
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.000000] BIOS-e820: [mem 0x0000000000100000-0x000000003ffd7fff] usable
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.000000] BIOS-e820: [mem 0x000000003ffd8000-0x000000003fffffff] reserved
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.000000] BIOS-e820: [mem 0x00000000b0000000-0x00000000bfffffff] reserved
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.000000] BIOS-e820: [mem 0x00000000fed1c000-0x00000000fed1ffff] reserved
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.000000] BIOS-e820: [mem 0x00000000feffc000-0x00000000feffffff] reserved
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.000000] BIOS-e820: [mem 0x00000000fffc0000-0x00000000ffffffff] reserved
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.000000] NX (Execute Disable) protection: active
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.000000] APIC: Static calls initialized
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.000000] SMBIOS 2.8 present.
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.000000] DMI: QEMU Standard PC (Q35 + ICH9, 2009), BIOS rel-1.17.0-0-gb52ca86e094d-prebuilt.qemu.org 04/01/2014
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.000000] DMI: Memory slots populated: 1/1
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.000000] Hypervisor detected: KVM
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.000000] last_pfn = 0x3ffd8 max_arch_pfn = 0x400000000
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.000000] kvm-clock: Using msrs 4b564d01 and 4b564d00
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.000002] kvm-clock: using sched offset of 620027666 cycles
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.000004] clocksource: kvm-clock: mask: 0xffffffffffffffff max_cycles: 0x1cd42e4dffb, max_idle_ns: 881590591483 ns
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.000009] tsc: Detected 2111.998 MHz processor
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.001426] last_pfn = 0x3ffd8 max_arch_pfn = 0x400000000
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.001470] MTRR map: 4 entries (3 fixed + 1 variable; max 19), built from 8 variable MTRRs
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.001474] x86/PAT: Configuration [0-7]: WB  WC  UC- UC  WB  WP  UC- WT
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.011853] found SMP MP-table at [mem 0x000f5450-0x000f545f]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.011883] Using GB pages for direct mapping
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012001] RAMDISK: [mem 0x3e437000-0x3ffcffff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012017] ACPI: Early table checksum verification disabled
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012022] ACPI: RSDP 0x00000000000F5270 000014 (v00 BOCHS )
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012028] ACPI: RSDT 0x000000003FFE2422 000038 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012036] ACPI: FACP 0x000000003FFE221A 0000F4 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012073] ACPI: DSDT 0x000000003FFE0040 0021DA (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012078] ACPI: FACS 0x000000003FFE0000 000040
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012082] ACPI: APIC 0x000000003FFE230E 000078 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012087] ACPI: HPET 0x000000003FFE2386 000038 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012091] ACPI: MCFG 0x000000003FFE23BE 00003C (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012096] ACPI: WAET 0x000000003FFE23FA 000028 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012099] ACPI: Reserving FACP table memory at [mem 0x3ffe221a-0x3ffe230d]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012101] ACPI: Reserving DSDT table memory at [mem 0x3ffe0040-0x3ffe2219]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012102] ACPI: Reserving FACS table memory at [mem 0x3ffe0000-0x3ffe003f]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012103] ACPI: Reserving APIC table memory at [mem 0x3ffe230e-0x3ffe2385]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012104] ACPI: Reserving HPET table memory at [mem 0x3ffe2386-0x3ffe23bd]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012104] ACPI: Reserving MCFG table memory at [mem 0x3ffe23be-0x3ffe23f9]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012105] ACPI: Reserving WAET table memory at [mem 0x3ffe23fa-0x3ffe2421]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012875] No NUMA configuration found
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012877] Faking a node at [mem 0x0000000000000000-0x000000003ffd7fff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012881] NODE_DATA(0) allocated [mem 0x3ffd2780-0x3ffd7cff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012970] Zone ranges:
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012971]   DMA      [mem 0x0000000000001000-0x0000000000ffffff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012973]   DMA32    [mem 0x0000000001000000-0x000000003ffd7fff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012975]   Normal   empty
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012976]   Device   empty
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012977] Movable zone start for each node
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012977] Early memory node ranges
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012978]   node   0: [mem 0x0000000000001000-0x000000000009efff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012979]   node   0: [mem 0x0000000000100000-0x000000003ffd7fff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.012981] Initmem setup node 0 [mem 0x0000000000001000-0x000000003ffd7fff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.013005] On node 0, zone DMA: 1 pages in unavailable ranges
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.013245] On node 0, zone DMA: 97 pages in unavailable ranges
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.028596] On node 0, zone DMA32: 40 pages in unavailable ranges
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.030243] ACPI: PM-Timer IO Port: 0x608
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.030266] ACPI: LAPIC_NMI (acpi_id[0xff] dfl dfl lint[0x1])
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.030319] IOAPIC[0]: apic_id 0, version 17, address 0xfec00000, GSI 0-23
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.030326] ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.030329] ACPI: INT_SRC_OVR (bus 0 bus_irq 5 global_irq 5 high level)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.030331] ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.030333] ACPI: INT_SRC_OVR (bus 0 bus_irq 10 global_irq 10 high level)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.030335] ACPI: INT_SRC_OVR (bus 0 bus_irq 11 global_irq 11 high level)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.030341] ACPI: Using ACPI (MADT) for SMP configuration information
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.030343] ACPI: HPET id: 0x8086a201 base: 0xfed00000
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.030348] TSC deadline timer available
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.030353] CPU topo: Max. logical packages:   1
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.030354] CPU topo: Max. logical dies:       1
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.030355] CPU topo: Max. dies per package:   1
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.030359] CPU topo: Max. threads per core:   1
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.030360] CPU topo: Num. cores per package:     1
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.030361] CPU topo: Num. threads per package:   1
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.030361] CPU topo: Allowing 1 present CPUs plus 0 hotplug CPUs
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.030383] kvm-guest: APIC: eoi() replaced with kvm_guest_apic_eoi_write()
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.030418] PM: hibernation: Registered nosave memory: [mem 0x00000000-0x00000fff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.030420] PM: hibernation: Registered nosave memory: [mem 0x0009f000-0x000fffff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.030422] [mem 0x40000000-0xafffffff] available for PCI devices
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.030423] Booting paravirtualized kernel on KVM
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.030426] clocksource: refined-jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1910969940391419 ns
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.036683] setup_percpu: NR_CPUS:512 nr_cpumask_bits:1 nr_cpu_ids:1 nr_node_ids:1
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.038504] percpu: Embedded 98 pages/cpu s278528 r8192 d114688 u2097152
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.038551] kvm-guest: PV spinlocks disabled, single CPU
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.038553] Kernel command line: console=ttyS0 console=tty0 panic=1 boot.panic_on_fail clocksource=acpi_pm root=fstab loglevel=7 net.ifnames=0 lsm=landlock,yama,bpf init=/nix/store/wsrlllf7r7l54q619lp4fx76hjj5wav5-nixos-system-machine-test/init regInfo=/nix/.ro-store/k4wi6y4h4rz7m3jz71k1s4qh17jq8qsk-closure-info/registration console=ttyS0,115200n8 console=tty0
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.038743] Unknown kernel command line parameters "regInfo=/nix/.ro-store/k4wi6y4h4rz7m3jz71k1s4qh17jq8qsk-closure-info/registration", will be passed to user space.
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.038789] random: crng init done
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.038790] printk: log buffer data + meta data: 1048576 + 3670016 = 4718592 bytes
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.038851] Dentry cache hash table entries: 131072 (order: 8, 1048576 bytes, linear)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.038885] Inode-cache hash table entries: 65536 (order: 7, 524288 bytes, linear)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.038942] Fallback order for Node 0: 0
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.038946] Built 1 zonelists, mobility grouping on.  Total pages: 262006
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.038947] Policy zone: DMA32
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.041110] mem auto-init: stack:all(zero), heap alloc:on, heap free:off
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.047139] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.049103] allocated 2097152 bytes of page_ext
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.049120] Kernel/User page tables isolation: enabled
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.058349] ftrace: allocating 49004 entries in 192 pages
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.058352] ftrace: allocated 192 pages with 2 groups
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.059212] Dynamic Preempt: lazy
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.059333] rcu: Preemptible hierarchical RCU implementation.
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.059334] rcu:        RCU event tracing is enabled.
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.059335] rcu:        RCU restricting CPUs from NR_CPUS=512 to nr_cpu_ids=1.
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.059336]     Trampoline variant of Tasks RCU enabled.
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.059337]     Rude variant of Tasks RCU enabled.
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.059337]     Tracing variant of Tasks RCU enabled.
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.059338] rcu: RCU calculated value of scheduler-enlistment delay is 100 jiffies.
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.059339] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=1
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.059358] RCU Tasks: Setting shift to 0 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=1.
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.059360] RCU Tasks Rude: Setting shift to 0 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=1.
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.059361] RCU Tasks Trace: Setting shift to 0 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=1.
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.065593] NR_IRQS: 33024, nr_irqs: 256, preallocated irqs: 16
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.065890] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.065901] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1911260446275000 ns
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.066087] kfence: initialized - using 2097152 bytes for 255 objects at 0x(____ptrval____)-0x(____ptrval____)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.079535] Console: colour VGA+ 80x25
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.079542] printk: legacy console [tty0] enabled
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.137191] printk: legacy console [ttyS0] enabled
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.399808] ACPI: Core revision 20250807
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.401802] clocksource: hpet: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604467 ns
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.405455] APIC: Switch to symmetric I/O mode setup
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.407737] x2apic enabled
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.409324] APIC: Switched APIC routing to: physical x2apic
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.412779] ..TIMER: vector=0x30 apic1=0 pin1=2 apic2=-1 pin2=-1
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.415161] clocksource: tsc-early: mask: 0xffffffffffffffff max_cycles: 0x1e71768ef8b, max_idle_ns: 440795218977 ns
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.418930] Calibrating delay loop (skipped) preset value.. 4223.99 BogoMIPS (lpj=2111998)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.421051] x86/cpu: User Mode Instruction Prevention (UMIP) activated
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.424005] Last level iTLB entries: 4KB 0, 2MB 0, 4MB 0
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.424929] Last level dTLB entries: 4KB 0, 2MB 0, 4MB 0, 1GB 0
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.426935] mitigations: Enabled attack vectors: user_kernel, user_user, guest_host, guest_guest, SMT mitigations: auto
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.427929] Speculative Store Bypass: Mitigation: Speculative Store Bypass disabled via prctl
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.429929] SRBDS: Unknown: Dependent on hypervisor status
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.431929] Spectre V2 : Mitigation: IBRS
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.432928] RETBleed: Mitigation: IBRS
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.434929] MDS: Mitigation: Clear CPU buffers
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.435928] MMIO Stale Data: Mitigation: Clear CPU buffers
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.437934] Spectre V1 : Mitigation: usercopy/swapgs barriers and __user pointer sanitization
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.439932] Spectre V2 : Spectre v2 / SpectreRSB: Filling RSB on context switch and VMEXIT
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.441939] Spectre V2 : Enabling IBPB for BPF
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.443931] Spectre V2 : mitigation: Enabling conditional Indirect Branch Prediction Barrier
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.444935] Spectre V2 : Spectre BHI mitigation: SW BHB clearing on syscall and VM exit
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.446947] x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.447929] x86/fpu: Supporting XSAVE feature 0x002: 'SSE registers'
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.449929] x86/fpu: Supporting XSAVE feature 0x004: 'AVX registers'
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.451929] x86/fpu: Supporting XSAVE feature 0x008: 'MPX bounds registers'
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.453929] x86/fpu: Supporting XSAVE feature 0x010: 'MPX CSR'
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.454929] x86/fpu: xstate_offset[2]:  576, xstate_sizes[2]:  256
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.455929] x86/fpu: xstate_offset[3]:  832, xstate_sizes[3]:   64
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.456929] x86/fpu: xstate_offset[4]:  896, xstate_sizes[4]:   64
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.457929] x86/fpu: Enabled xstate features 0x1f, context size is 960 bytes, using 'compacted' format.
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.498570] Freeing SMP alternatives memory: 48K
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.499946] pid_max: default: 32768 minimum: 301
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.502118] LSM: initializing lsm=lockdown,capability,landlock,yama,bpf,ima
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.504090] landlock: Up and running.
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.505931] Yama: becoming mindful.
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.508190] LSM support for eBPF active
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.510124] Mount-cache hash table entries: 2048 (order: 2, 16384 bytes, linear)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.511950] Mountpoint-cache hash table entries: 2048 (order: 2, 16384 bytes, linear)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.515619] smpboot: CPU0: Intel(R) Core(TM) i7-8650U CPU @ 1.90GHz (family: 0x6, model: 0x8e, stepping: 0xa)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.516489] Performance Events: Skylake events, full-width counters, Intel PMU driver.
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.517934] ... version:                   2
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.518935] ... bit width:                 48
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.519930] ... generic counters:          4
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.520930] ... generic bitmap:            000000000000000f
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.521930] ... fixed-purpose counters:    3
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.522930] ... fixed-purpose bitmap:      0000000000000007
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.523930] ... value mask:                0000ffffffffffff
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.524930] ... max period:                00007fffffffffff
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.525930] ... global_ctrl mask:          000000070000000f
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.527116] signal: max sigframe size: 2032
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.528008] rcu: Hierarchical SRCU implementation.
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.528935] rcu:        Max phase no-delay instances is 400.
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.530607] smp: Bringing up secondary CPUs ...
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.531949] smp: Brought up 1 node, 1 CPU
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.532936] smpboot: Total of 1 processors activated (4223.99 BogoMIPS)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.534262] Memory: 937696K/1048024K available (18198K kernel code, 5432K rwdata, 13720K rodata, 6720K init, 3992K bss, 102904K reserved, 0K cma-reserved)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.536633] devtmpfs: initialized
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.538225] x86/mm: Memory block size: 128MB
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.539801] posixtimers hash table entries: 512 (order: 1, 8192 bytes, linear)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.540956] futex hash table entries: 256 (16384 bytes on 1 NUMA nodes, total 16 KiB, linear).
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.542105] pinctrl core: initialized pinctrl subsystem
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.543328] PM: RTC time: 15:35:03, date: 2026-11-05
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.546248] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.547259] DMA: preallocated 128 KiB GFP_KERNEL pool for atomic allocations
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.547948] DMA: preallocated 128 KiB GFP_KERNEL|GFP_DMA pool for atomic allocations
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.549090] DMA: preallocated 128 KiB GFP_KERNEL|GFP_DMA32 pool for atomic allocations
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.549949] audit: initializing netlink subsys (disabled)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.551198] thermal_sys: Registered thermal governor 'fair_share'
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.551200] thermal_sys: Registered thermal governor 'bang_bang'
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.551954] audit: type=2000 audit(1793892903.537:1): state=initialized audit_enabled=0 res=1
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.553935] thermal_sys: Registered thermal governor 'step_wise'
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.553937] thermal_sys: Registered thermal governor 'user_space'
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.554930] thermal_sys: Registered thermal governor 'power_allocator'
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.555959] cpuidle: using governor menu
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.558106] acpiphp: ACPI Hot Plug PCI Controller Driver version: 0.5
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.559244] PCI: ECAM [mem 0xb0000000-0xbfffffff] (base 0xb0000000) for domain 0000 [bus 00-ff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.559938] PCI: ECAM [mem 0xb0000000-0xbfffffff] reserved as E820 entry
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.560966] PCI: Using configuration type 1 for base access
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.562634] kprobes: kprobe jump-optimization is enabled. All kprobes are optimized if possible.
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.569131] HugeTLB: registered 1.00 GiB page size, pre-allocated 0 pages
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.569942] HugeTLB: 16380 KiB vmemmap can be freed for a 1.00 GiB page
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.572943] HugeTLB: registered 2.00 MiB page size, pre-allocated 0 pages
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.573941] HugeTLB: 28 KiB vmemmap can be freed for a 2.00 MiB page
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.587243] ACPI: Added _OSI(Module Device)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.587932] ACPI: Added _OSI(Processor Device)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.590933] ACPI: Added _OSI(Processor Aggregator Device)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.598506] ACPI: 1 ACPI AML tables successfully acquired and loaded
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.609362] ACPI: Interpreter enabled
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.609946] ACPI: PM: (supports S0 S3 S4 S5)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.614930] ACPI: Using IOAPIC for interrupt routing
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.615990] PCI: Using host bridge windows from ACPI; if necessary, use "pci=nocrs" and report a bug
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.619932] PCI: Using E820 reservations for host bridge windows
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.621114] ACPI: Enabled 2 GPEs in block 00 to 3F
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.629688] ACPI: PCI Root Bridge [PCI0] (domain 0000 [bus 00-ff])
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.632742] acpi PNP0A08:00: _OSC: OS supports [ExtendedConfig ASPM ClockPM Segments MSI HPX-Type3]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.634029] acpi PNP0A08:00: _OSC: platform does not support [PCIeHotplug LTR]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.635072] acpi PNP0A08:00: _OSC: OS now controls [PME AER PCIeCapability]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.636503] PCI host bridge to bus 0000:00
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.636937] pci_bus 0000:00: root bus resource [io  0x0000-0x0cf7 window]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.637931] pci_bus 0000:00: root bus resource [io  0x0d00-0xffff window]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.638931] pci_bus 0000:00: root bus resource [mem 0x000a0000-0x000bffff window]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.639930] pci_bus 0000:00: root bus resource [mem 0x40000000-0xafffffff window]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.640931] pci_bus 0000:00: root bus resource [mem 0xc0000000-0xfebfffff window]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.641963] pci_bus 0000:00: root bus resource [mem 0x100000000-0x8ffffffff window]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.642936] pci_bus 0000:00: root bus resource [bus 00-ff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.644070] pci 0000:00:00.0: [8086:29c0] type 00 class 0x060000 conventional PCI endpoint
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.645982] pci 0000:00:01.0: [1234:1111] type 00 class 0x030000 conventional PCI endpoint
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.649019] pci 0000:00:01.0: BAR 0 [mem 0xfd000000-0xfdffffff pref]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.649962] pci 0000:00:01.0: BAR 2 [mem 0xfebd0000-0xfebd0fff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.650997] pci 0000:00:01.0: ROM [mem 0xfebc0000-0xfebcffff pref]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.652232] pci 0000:00:01.0: Video device with shadowed ROM at [mem 0x000c0000-0x000dffff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.653925] pci 0000:00:02.0: [1af4:1000] type 00 class 0x020000 conventional PCI endpoint
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.656946] pci 0000:00:02.0: BAR 0 [io  0xc100-0xc11f]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.657950] pci 0000:00:02.0: BAR 1 [mem 0xfebd1000-0xfebd1fff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.659006] pci 0000:00:02.0: BAR 4 [mem 0xfe000000-0xfe003fff 64bit pref]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.659952] pci 0000:00:02.0: ROM [mem 0xfeb40000-0xfeb7ffff pref]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.662977] pci 0000:00:03.0: [1af4:1005] type 00 class 0x00ff00 conventional PCI endpoint
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.665950] pci 0000:00:03.0: BAR 0 [io  0xc120-0xc13f]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.666948] pci 0000:00:03.0: BAR 1 [mem 0xfebd2000-0xfebd2fff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.667992] pci 0000:00:03.0: BAR 4 [mem 0xfe004000-0xfe007fff 64bit pref]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.670694] pci 0000:00:04.0: [1af4:1001] type 00 class 0x010000 conventional PCI endpoint
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.673948] pci 0000:00:04.0: BAR 0 [io  0xc000-0xc07f]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.674947] pci 0000:00:04.0: BAR 1 [mem 0xfebd3000-0xfebd3fff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.675990] pci 0000:00:04.0: BAR 4 [mem 0xfe008000-0xfe00bfff 64bit pref]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.678409] pci 0000:00:05.0: [1af4:1000] type 00 class 0x020000 conventional PCI endpoint
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.681953] pci 0000:00:05.0: BAR 0 [io  0xc140-0xc15f]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.682959] pci 0000:00:05.0: BAR 1 [mem 0xfebd4000-0xfebd4fff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.684005] pci 0000:00:05.0: BAR 4 [mem 0xfe00c000-0xfe00ffff 64bit pref]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.684957] pci 0000:00:05.0: ROM [mem 0xfeb80000-0xfebbffff pref]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.687449] pci 0000:00:06.0: [1af4:1052] type 00 class 0x090000 conventional PCI endpoint
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.690970] pci 0000:00:06.0: BAR 1 [mem 0xfebd5000-0xfebd5fff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.691994] pci 0000:00:06.0: BAR 4 [mem 0xfe010000-0xfe013fff 64bit pref]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.694380] pci 0000:00:07.0: [1af4:105a] type 00 class 0x018000 conventional PCI endpoint
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.696691] pci 0000:00:07.0: BAR 1 [mem 0xfebd6000-0xfebd6fff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.697991] pci 0000:00:07.0: BAR 4 [mem 0xfe014000-0xfe017fff 64bit pref]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.700228] pci 0000:00:08.0: [1af4:105a] type 00 class 0x018000 conventional PCI endpoint
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.702643] pci 0000:00:08.0: BAR 1 [mem 0xfebd7000-0xfebd7fff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.704006] pci 0000:00:08.0: BAR 4 [mem 0xfe018000-0xfe01bfff 64bit pref]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.706244] pci 0000:00:09.0: [1af4:105a] type 00 class 0x018000 conventional PCI endpoint
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.708708] pci 0000:00:09.0: BAR 1 [mem 0xfebd8000-0xfebd8fff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.710086] pci 0000:00:09.0: BAR 4 [mem 0xfe01c000-0xfe01ffff 64bit pref]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.712435] pci 0000:00:0a.0: [1af4:1003] type 00 class 0x078000 conventional PCI endpoint
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.715989] pci 0000:00:0a.0: BAR 0 [io  0xc080-0xc0bf]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.716952] pci 0000:00:0a.0: BAR 1 [mem 0xfebd9000-0xfebd9fff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.718003] pci 0000:00:0a.0: BAR 4 [mem 0xfe020000-0xfe023fff 64bit pref]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.722333] pci 0000:00:0b.0: [1af4:1005] type 00 class 0x00ff00 conventional PCI endpoint
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.725019] pci 0000:00:0b.0: BAR 0 [io  0xc160-0xc17f]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.725955] pci 0000:00:0b.0: BAR 1 [mem 0xfebda000-0xfebdafff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.727149] pci 0000:00:0b.0: BAR 4 [mem 0xfe024000-0xfe027fff 64bit pref]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.729769] pci 0000:00:1d.0: [8086:2934] type 00 class 0x0c0300 conventional PCI endpoint
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.732718] pci 0000:00:1d.0: BAR 4 [io  0xc180-0xc19f]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.734415] pci 0000:00:1d.1: [8086:2935] type 00 class 0x0c0300 conventional PCI endpoint
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.738035] pci 0000:00:1d.1: BAR 4 [io  0xc1a0-0xc1bf]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.739982] pci 0000:00:1d.2: [8086:2936] type 00 class 0x0c0300 conventional PCI endpoint
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.742393] pci 0000:00:1d.2: BAR 4 [io  0xc1c0-0xc1df]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.744545] pci 0000:00:1d.7: [8086:293a] type 00 class 0x0c0320 conventional PCI endpoint
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.746950] pci 0000:00:1d.7: BAR 0 [mem 0xfebdb000-0xfebdbfff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.748426] pci 0000:00:1f.0: [8086:2918] type 00 class 0x060100 conventional PCI endpoint
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.750759] pci 0000:00:1f.0: quirk: [io  0x0600-0x067f] claimed by ICH6 ACPI/GPIO/TCO
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.752455] pci 0000:00:1f.2: [8086:2922] type 00 class 0x010601 conventional PCI endpoint
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.756027] pci 0000:00:1f.2: BAR 4 [io  0xc1e0-0xc1ff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.756950] pci 0000:00:1f.2: BAR 5 [mem 0xfebdc000-0xfebdcfff]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.758721] pci 0000:00:1f.3: [8086:2930] type 00 class 0x0c0500 conventional PCI endpoint
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.761007] pci 0000:00:1f.3: BAR 4 [io  0x0700-0x073f]
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.770607] ACPI: PCI: Interrupt link LNKA configured for IRQ 10
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.772095] ACPI: PCI: Interrupt link LNKB configured for IRQ 10
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.773092] ACPI: PCI: Interrupt link LNKC configured for IRQ 11
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.774096] ACPI: PCI: Interrupt link LNKD configured for IRQ 11
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.775091] ACPI: PCI: Interrupt link LNKE configured for IRQ 10
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.776085] ACPI: PCI: Interrupt link LNKF configured for IRQ 10
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.777104] ACPI: PCI: Interrupt link LNKG configured for IRQ 11
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.778116] ACPI: PCI: Interrupt link LNKH configured for IRQ 11
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.779004] ACPI: PCI: Interrupt link GSIA configured for IRQ 16
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.779953] ACPI: PCI: Interrupt link GSIB configured for IRQ 17
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.780947] ACPI: PCI: Interrupt link GSIC configured for IRQ 18
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.781947] ACPI: PCI: Interrupt link GSID configured for IRQ 19
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.782943] ACPI: PCI: Interrupt link GSIE configured for IRQ 20
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.783947] ACPI: PCI: Interrupt link GSIF configured for IRQ 21
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.784944] ACPI: PCI: Interrupt link GSIG configured for IRQ 22
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.785944] ACPI: PCI: Interrupt link GSIH configured for IRQ 23
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.787880] iommu: Default domain type: Translated
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.788937] iommu: DMA domain TLB invalidation policy: lazy mode
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.790167] ACPI: bus type USB registered
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.790975] usbcore: registered new interface driver usbfs
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.791952] usbcore: registered new interface driver hub
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.792939] usbcore: registered new device driver usb
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.794717] NetLabel: Initializing
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.795855] NetLabel:  domain hash size = 128
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.796929] NetLabel:  protocols = UNLABELED CIPSOv4 CALIPSO
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.797958] NetLabel:  unlabeled traffic allowed by default
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.798942] PCI: Using ACPI for IRQ routing
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.917006] pci 0000:00:01.0: vgaarb: setting as boot VGA device
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.917926] pci 0000:00:01.0: vgaarb: bridge control possible
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.917926] pci 0000:00:01.0: vgaarb: VGA device added: decodes=io+mem,owns=io+mem,locks=none
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.917934] vgaarb: loaded
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.919297] hpet0: at MMIO 0xfed00000, IRQs 2, 8, 0
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.919933] hpet0: 3 comparators, 64-bit 100.000000 MHz counter
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.925023] clocksource: Switched to clocksource kvm-clock
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.928836] VFS: Disk quotas dquot_6.6.0
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.930239] VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.932684] pnp: PnP ACPI init
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.934260] ACPI: IRQ 4 override to edge(!), high(!)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.936139] system 00:04: [mem 0xb0000000-0xbfffffff window] has been reserved
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.940886] pnp: PnP ACPI: found 5 devices
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.949314] clocksource: acpi_pm: mask: 0xffffff max_cycles: 0xffffff, max_idle_ns: 2085701024 ns
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.952495] clocksource: Switched to clocksource acpi_pm
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.954557] NET: Registered PF_INET protocol family
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.956506] IP idents hash table entries: 16384 (order: 5, 131072 bytes, linear)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.975009] tcp_listen_portaddr_hash hash table entries: 512 (order: 1, 8192 bytes, linear)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.978144] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.980880] TCP established hash table entries: 8192 (order: 4, 65536 bytes, linear)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.983688] TCP bind hash table entries: 8192 (order: 6, 262144 bytes, linear)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.986522] TCP: Hash tables configured (established 8192 bind 8192)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.990387] MPTCP token hash table entries: 1024 (order: 3, 24576 bytes, linear)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.995225] UDP hash table entries: 512 (order: 3, 32768 bytes, linear)
+vm-test-run-mihomo-dual-stack-uid> machine # [    0.998002] UDP-Lite hash table entries: 512 (order: 3, 32768 bytes, linear)
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.001003] NET: Registered PF_UNIX/PF_LOCAL protocol family
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.003380] NET: Registered PF_XDP protocol family
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.005378] pci_bus 0000:00: resource 4 [io  0x0000-0x0cf7 window]
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.007868] pci_bus 0000:00: resource 5 [io  0x0d00-0xffff window]
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.010341] pci_bus 0000:00: resource 6 [mem 0x000a0000-0x000bffff window]
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.012954] pci_bus 0000:00: resource 7 [mem 0x40000000-0xafffffff window]
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.015582] pci_bus 0000:00: resource 8 [mem 0xc0000000-0xfebfffff window]
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.018165] pci_bus 0000:00: resource 9 [mem 0x100000000-0x8ffffffff window]
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.021405] ACPI: \_SB_.GSIA: Enabled at IRQ 16
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.024351] ACPI: \_SB_.GSIB: Enabled at IRQ 17
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.027289] ACPI: \_SB_.GSIC: Enabled at IRQ 18
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.030265] ACPI: \_SB_.GSID: Enabled at IRQ 19
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.032935] PCI: CLS 0 bytes, default 64
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.034710] clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x1e71768ef8b, max_idle_ns: 440795218977 ns
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.038182] Trying to unpack rootfs image as initramfs...
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.102018] Initialise system trusted keyrings
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.107128] Key type blacklist registered
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.112271] workingset: timestamp_bits=40 max_order=18 bucket_order=0
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.119284] integrity: Platform Keyring initialized
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.121312] integrity: Machine keyring initialized
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.152757] Key type asymmetric registered
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.157094] Asymmetric key parser 'x509' registered
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.159272] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 248)
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.169247] io scheduler mq-deadline registered
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.175101] io scheduler kyber registered
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.181822] Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.190604] 00:03: ttyS0 at I/O 0x3f8 (irq = 4, base_baud = 115200) is a 16550A
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.201157] Linux agpgart interface v0.103
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.207168] ACPI: bus type drm_connector registered
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.212255] usbcore: registered new interface driver usbserial_generic
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.215006] usbserial: USB Serial support registered for generic
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.224149] intel_pstate: CPU model not supported
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.227552] drop_monitor: Initializing network drop monitor service
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.239292] NET: Registered PF_INET6 protocol family
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.245411] Segment Routing with IPv6
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.250102] In-situ OAM (IOAM) with IPv6
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.255352] IPI shorthand broadcast: enabled
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.263768] sched_clock: Marking stable (918047867, 345026956)->(1532003262, -268928439)
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.274322] registered taskstats version 1
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.276395] Loading compiled-in X.509 certificates
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.297088] Demotion targets for Node 0: null
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.301151] Key type .fscrypt registered
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.302878] Key type fscrypt-provisioning registered
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.309224] ima: No TPM chip found, activating TPM-bypass!
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.311396] ima: Allocated hash algorithm: sha1
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.317118] ima: No architecture policies found
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.321223] PM:   Magic number: 2:28:588
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.326253] RAS: Correctable Errors collector initialized.
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.346825] clk: Disabling unused clocks
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.352098] PM: genpd: Disabling unused power domains
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.510943] Freeing initrd memory: 28260K
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.515572] Freeing unused decrypted memory: 2028K
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.521495] Freeing unused kernel image (initmem) memory: 6720K
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.524122] Write protecting the kernel read-only data: 32768k
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.526856] Freeing unused kernel image (text/rodata gap) memory: 232K
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.530016] Freeing unused kernel image (rodata/data gap) memory: 616K
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.581771] x86/mm: Checked W+X mappings: passed, no W+X pages found.
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.584068] x86/mm: Checking user space page tables
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.631271] x86/mm: Checked W+X mappings: passed, no W+X pages found.
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.633366] Run /init as init process
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.644217] autofs4: module verification failed: signature and/or required key missing - tainting kernel
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.648286] systemd[1]: Inserted module 'autofs4'
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.675406] fuse: init (API version 7.45)
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.685220] ACPI: \_SB_.GSIG: Enabled at IRQ 22
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.689115] ACPI: \_SB_.GSIH: Enabled at IRQ 23
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.694020] ACPI: \_SB_.GSIE: Enabled at IRQ 20
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.697730] ACPI: \_SB_.GSIF: Enabled at IRQ 21
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.706145] virtiofs virtio5: discovered new tag: nix-store
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.709967] virtiofs virtio5: virtio_fs_setup_dax: No cache capability
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.720221] virtiofs virtio6: discovered new tag: shared
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.724886] virtiofs virtio6: virtio_fs_setup_dax: No cache capability
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.732903] virtiofs virtio7: discovered new tag: xchg
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.736816] virtiofs virtio7: virtio_fs_setup_dax: No cache capability
+vm-test-run-mihomo-dual-stack-uid> machine # [    1.775218] systemd[1]: Successfully made /usr/ read-only.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.121428] systemd[1]: systemd 262 running in system mode (+PAM +AUDIT -SELINUX +APPARMOR +IMA +IPE +SMACK +SECCOMP -GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 +KMOD +LIBCRYPTSETUP +LIBCRYPTSETUP_PLUGINS +LIBFDISK +PCRE2 +PWQUALITY +P11KIT +QRENCODE +TPM2 +BZIP2 +LZ4 +XZ +ZLIB +ZSTD +BPF_FRAMEWORK -BTF -XKBCOMMON +UTMP +LIBARCHIVE)
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.153268] systemd[1]: Detected virtualization kvm.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.156141] systemd[1]: Detected architecture x86-64.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.159013] systemd[1]: Running in initrd.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.162304] systemd[1]: Initializing machine ID from random generator.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.165463] systemd[1]: Hostname set to <machine>.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.265917] systemd[1]: bpf-restrict-fs: LSM BPF program attached
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.328747] systemd[1]: Queued start job for default target Initrd Default Target.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.338717] systemd[1]: Created slice Slice /system/modprobe.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.342455] systemd[1]: Started Dispatch Password Requests to Console Directory Watch.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.346413] systemd[1]: Expecting device /dev/disk/by-label/nixos...
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.349686] systemd[1]: Reached target Path Units.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.352296] systemd[1]: Reached target Slice Units.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.354852] systemd[1]: Reached target Swaps.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.357326] systemd[1]: Reached target Timer Units.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.359811] systemd[1]: Listening on D-Bus System Message Bus Socket.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.362871] systemd[1]: Listening on Journal Socket (/dev/log).
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.365768] systemd[1]: Listening on Journal Sockets.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.368326] systemd[1]: Listening on udev Kernel Socket.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.371113] systemd[1]: Listening on udev Varlink Socket.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.380886] systemd[1]: Reached target Socket Units.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.384522] systemd[1]: Starting Create List of Static Device Nodes...
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.391960] systemd[1]: Starting Load Kernel Module configfs...
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.412376] systemd[1]: Starting Journal Service...
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.426353] systemd[1]: Starting Load Kernel Modules...
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.433240] systemd[1]: Early TPM SRK Setup skipped, unmet condition check ConditionSecurity=measured-os
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.443547] systemd[1]: Starting Coldplug All udev Devices...
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.477179] systemd[1]: Finished Create List of Static Device Nodes.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.489851] systemd-journald[65]: Collecting audit messages is disabled.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.495295] systemd[1]: modprobe@configfs.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.508239] systemd[1]: Finished Load Kernel Module configfs.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.520037] systemd[1]: Kernel Configuration File System skipped, unmet condition check ConditionPathExists=/sys/kernel/config
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.533100] device-mapper: core: CONFIG_IMA_DISABLE_HTABLE is disabled. Duplicate IMA measurements will not be recorded in the IMA log.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.545345] systemd[1]: Starting Create Static Device Nodes in /dev gracefully...
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.552206] device-mapper: ioctl: 4.50.0-ioctl (2025-04-28) initialised: dm-devel@lists.linux.dev
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.598244] systemd[1]: Finished Create Static Device Nodes in /dev gracefully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.615301] systemd[1]: Finished Load Kernel Modules.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.626370] systemd[1]: Starting Apply Kernel Variables...
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.650248] systemd[1]: Starting Create Static Device Nodes in /dev...
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.687351] systemd[1]: Finished Apply Kernel Variables.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.712340] systemd[1]: Finished Create Static Device Nodes in /dev.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.720501] systemd[1]: Reached target Preparation for Local File Systems.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.730392] systemd[1]: Reached target Local File Systems.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.742561] systemd[1]: Starting Rule-based Manager for Device Events and Files...
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.407838] systemd-modules-load[66]: Inserted module 'dm_mod'
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.414630] systemd-modules-load[66]: Inserted module 'virtio_balloon'
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.418535] systemd-modules-load[66]: Inserted module 'virtio_gpu'
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.770916] systemd[1]: Started Journal Service.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.452700] systemd[1]: Starting Create System Files and Directories...
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.497180] systemd[1]: Finished Create System Files and Directories.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.502925] systemd-udevd[72]: Using default interface naming scheme 'v261'.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.567140] systemd[1]: Finished Coldplug All udev Devices.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.572171] systemd[1]: Started Rule-based Manager for Device Events and Files.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.575401] systemd[1]: Reached target System Initialization.
+vm-test-run-mihomo-dual-stack-uid> machine # [    2.578388] systemd[1]: Reached target Basic System.
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.193856] virtio_blk virtio2: 1/0/0 default/read/poll queues
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.225871] virtio_blk virtio2: [vda] 2097152 512-byte logical blocks (1.07 GB/1.00 GiB)
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.261954] i8042: PNP: PS/2 Controller [PNP0303:KBD,PNP0f13:MOU] at 0x60,0x64 irq 1,12
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.278325] serio: i8042 KBD port at 0x60,0x64 irq 1
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.294766] serio: i8042 AUX port at 0x60,0x64 irq 12
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.301169] ehci-pci 0000:00:1d.7: EHCI Host Controller
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.302670] ehci-pci 0000:00:1d.7: new USB bus registered, assigned bus number 1
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.306953] ehci-pci 0000:00:1d.7: irq 19, io mem 0xfebdb000
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.317136] ehci-pci 0000:00:1d.7: USB 2.0 started, EHCI 1.00
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.321145] usb usb1: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 6.18
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.323728] usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.330958] usb usb1: Product: EHCI Host Controller
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.334237] usb usb1: Manufacturer: Linux 6.18.60 ehci_hcd
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.337104] usb usb1: SerialNumber: 0000:00:1d.7
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.341241] hub 1-0:1.0: USB hub found
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.342743] hub 1-0:1.0: 6 ports detected
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.347314] uhci_hcd 0000:00:1d.0: UHCI Host Controller
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.348730] uhci_hcd 0000:00:1d.0: new USB bus registered, assigned bus number 2
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.369243] uhci_hcd 0000:00:1d.0: detected 2 ports
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.381282] uhci_hcd 0000:00:1d.0: irq 16, io port 0x0000c180
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.396173] usb usb2: New USB device found, idVendor=1d6b, idProduct=0001, bcdDevice= 6.18
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.398496] usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.069930] (udev-worker)[85]: eth1: Config file /etc/systemd/network/40-eth1.link is applied to device based on potentially unpredictable interface name.
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.075545] systemd[1]: Starting Virtual Console Setup...
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.079290] (udev-worker)[92]: Network interface NamePolicy= disabled on kernel command line.
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.436527] SCSI subsystem initialized
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.096921] (udev-worker)[85]: Network interface NamePolicy= disabled on kernel command line.
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.127523] systemd-vconsole-setup[95]: Configuration of first virtual console was skipped, ignoring remaining ones.
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.476841] usb usb2: Product: UHCI Host Controller
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.135144] systemd[1]: Finished Virtual Console Setup.
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.499119] usb usb2: Manufacturer: Linux 6.18.60 uhci_hcd
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.157405] systemd[1]: Found device /dev/disk/by-label/nixos.
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.159486] systemd[1]: Reached target Initrd Root Device.
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.163548] systemd[1]: Starting File System Check on /dev/disk/by-label/nixos...
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.519915] input: AT Translated Set 2 keyboard as /devices/platform/i8042/serio0/input/input0
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.537502] usb usb2: SerialNumber: 0000:00:1d.0
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.207137] systemd-fsck[103]: nixos: clean, 12/65536 files, 13019/262144 blocks
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.558606] hub 2-0:1.0: USB hub found
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.563150] hub 2-0:1.0: 2 ports detected
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.227201] systemd[1]: Finished File System Check on /dev/disk/by-label/nixos.
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.579122] usb 1-1: new high-speed USB device number 2 using ehci-pci
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.236498] systemd[1]: Mounting /sysroot...
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.585894] uhci_hcd 0000:00:1d.1: UHCI Host Controller
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.597982] uhci_hcd 0000:00:1d.1: new USB bus registered, assigned bus number 3
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.612182] uhci_hcd 0000:00:1d.1: detected 2 ports
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.622382] uhci_hcd 0000:00:1d.1: irq 17, io port 0x0000c1a0
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.639130] usb usb3: New USB device found, idVendor=1d6b, idProduct=0001, bcdDevice= 6.18
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.641804] usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.664098] usb usb3: Product: UHCI Host Controller
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.667099] usb usb3: Manufacturer: Linux 6.18.60 uhci_hcd
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.678095] usb usb3: SerialNumber: 0000:00:1d.1
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.691376] hub 3-0:1.0: USB hub found
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.704382] hub 3-0:1.0: 2 ports detected
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.710633] uhci_hcd 0000:00:1d.2: UHCI Host Controller
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.714792] uhci_hcd 0000:00:1d.2: new USB bus registered, assigned bus number 4
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.722178] uhci_hcd 0000:00:1d.2: detected 2 ports
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.726390] uhci_hcd 0000:00:1d.2: irq 18, io port 0x0000c1c0
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.731240] usb 1-1: New USB device found, idVendor=0627, idProduct=0001, bcdDevice= 0.00
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.733916] usb 1-1: New USB device strings: Mfr=1, Product=3, SerialNumber=10
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.736932] usb usb4: New USB device found, idVendor=1d6b, idProduct=0001, bcdDevice= 6.18
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.739264] usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.744099] usb 1-1: Product: QEMU USB Tablet
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.748099] usb 1-1: Manufacturer: QEMU
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.749467] usb usb4: Product: UHCI Host Controller
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.751105] usb 1-1: SerialNumber: 28754-0000:00:1d.7-1
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.755100] usb usb4: Manufacturer: Linux 6.18.60 uhci_hcd
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.758336] usb usb4: SerialNumber: 0000:00:1d.2
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.769425] hub 4-0:1.0: USB hub found
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.773883] hub 4-0:1.0: 2 ports detected
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.790955] ahci 0000:00:1f.2: AHCI vers 0001.0000, 32 command slots, 1.5 Gbps, SATA mode
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.809330] EXT4-fs (vda): mounted filesystem 1fda5eed-50b8-4498-960b-3f2553a89bdb r/w with ordered data mode. Quota mode: none.
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.473714] systemd[1]: Mounted /sysroot.
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.820444] ahci 0000:00:1f.2: 6/6 ports implemented (port mask 0x3f)
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.479482] systemd[1]: Reached target Initrd Root File System.
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.486119] systemd[1]: Starting Mountpoints Configured in the Real Root...
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.847129] ahci 0000:00:1f.2: flags: 64bit ncq only
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.505930] systemd-sysroot-fstab-check[113]: /sysroot should be mounted in the initrd, will request daemon-reload.
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.513749] systemd[1]: Reload requested from client PID 113 ('systemd-sysroot') (unit initrd-parse-etc.service)...
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.519847] systemd[1]: Reloading...
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.907408] scsi host0: ahci
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.921255] scsi host1: ahci
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.936158] scsi host2: ahci
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.946211] scsi host3: ahci
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.952981] hid: raw HID events driver (C) Jiri Kosina
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.959220] scsi host4: ahci
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.965915] scsi host5: ahci
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.969254] ata1: SATA max UDMA/133 abar m4096@0xfebdc000 port 0xfebdc100 irq 47 lpm-pol 1
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.982233] ata2: SATA max UDMA/133 abar m4096@0xfebdc000 port 0xfebdc180 irq 47 lpm-pol 1
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.991130] ata3: SATA max UDMA/133 abar m4096@0xfebdc000 port 0xfebdc200 irq 47 lpm-pol 1
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.996142] ata4: SATA max UDMA/133 abar m4096@0xfebdc000 port 0xfebdc280 irq 47 lpm-pol 1
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.001132] ata5: SATA max UDMA/133 abar m4096@0xfebdc000 port 0xfebdc300 irq 47 lpm-pol 1
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.006276] usbcore: registered new interface driver usbhid
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.011732] usbhid: USB HID core driver
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.014144] ata6: SATA max UDMA/133 abar m4096@0xfebdc000 port 0xfebdc380 irq 47 lpm-pol 1
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.031812] input: QEMU QEMU USB Tablet as /devices/pci0000:00/0000:00:1d.7/usb1/1-1/1-1:1.0/0003:0627:0001.0001/input/input2
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.038422] hid-generic 0003:0627:0001.0001: input,hidraw0: USB HID v0.01 Mouse [QEMU QEMU USB Tablet] on usb-0000:00:1d.7-1/input0
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.702709] systemd[1]: Reloading finished in 184 ms.
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.712661] systemd-sysroot-fstab-check[113]: Requesting initrd-fs.target/start/replace...
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.718287] systemd-sysroot-fstab-check[113]: Requesting swap.target/start/replace...
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.725271] systemd[1]: initrd-parse-etc.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.728204] systemd[1]: Finished Mountpoints Configured in the Real Root.
+vm-test-run-mihomo-dual-stack-uid> machine # [    3.730508] systemd[1]: initrd-parse-etc.service: Triggering OnSuccess= dependencies.
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.338318] ata3: SATA link up 1.5 Gbps (SStatus 113 SControl 300)
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.348044] ata3.00: ATAPI: QEMU DVD-ROM, 2.5+, max UDMA/100
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.356876] ata3.00: applying bridge limits
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.362508] ata2: SATA link down (SStatus 0 SControl 300)
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.367342] ata1: SATA link down (SStatus 0 SControl 300)
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.371464] ata4: SATA link down (SStatus 0 SControl 300)
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.374888] ata6: SATA link down (SStatus 0 SControl 300)
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.378267] ata5: SATA link down (SStatus 0 SControl 300)
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.380921] ata3.00: configured for UDMA/100
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.384816] scsi 2:0:0:0: CD-ROM            QEMU     QEMU DVD-ROM     2.5+ PQ: 0 ANSI: 5
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.442407] sr 2:0:0:0: [sr0] scsi3-mmc drive: 4x/4x cd/rw xa/form2 tray
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.452306] cdrom: Uniform CD-ROM driver Revision: 3.20
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.127608] systemd[1]: Mounting /sysroot/nix/.ro-store...
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.136088] systemd[1]: Mounting /sysroot/nix/.rw-store...
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.140491] systemd[1]: Mounting /sysroot/run...
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.149789] systemd[1]: Mounting /sysroot/tmp/shared...
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.164570] systemd[1]: Mounting /sysroot/tmp/xchg...
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.227355] systemd[1]: Mounted /sysroot/nix/.ro-store.
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.237320] systemd[1]: Mounted /sysroot/nix/.rw-store.
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.242141] systemd[1]: Mounted /sysroot/run.
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.243978] systemd[1]: Mounted /sysroot/tmp/shared.
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.246307] systemd[1]: Mounted /sysroot/tmp/xchg.
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.254887] systemd[1]: Starting rw-sysroot-nix-store.service...
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.267826] systemd[1]: rw-sysroot-nix-store.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    4.271985] systemd[1]: Finished rw-sysroot-nix-store.service.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.133524] systemd[1]: Mounting /sysroot/nix/store...
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.192567] systemd[1]: Mounted /sysroot/nix/store.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.196125] systemd[1]: Reached target Initrd File Systems.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.198540] systemd[1]: Starting Find NixOS closure...
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.202432] systemd[1]: Starting Create Volatile Files and Directories in the Real Root...
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.231908] systemd[1]: Finished Create Volatile Files and Directories in the Real Root.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.238162] systemd[1]: sysroot-run-credentials-systemd\x2dtmpfiles\x2dsetup\x2dsysroot.service.mount: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.248347] systemd[1]: Finished Find NixOS closure.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.250848] systemd[1]: Reached target Initrd Default Target.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.254138] systemd[1]: Starting Cleaning Up and Shutting Down Daemons...
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.274907] systemd[1]: Stopped target Initrd Default Target.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.277739] systemd[1]: Stopped target Basic System.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.280275] systemd[1]: Stopped target Initrd Root Device.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.282249] systemd[1]: Stopped target Path Units.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.284306] systemd[1]: systemd-ask-password-console.path: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.287052] systemd[1]: Stopped Dispatch Password Requests to Console Directory Watch.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.289865] systemd[1]: Stopped target Slice Units.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.292294] systemd[1]: Stopped target Socket Units.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.294091] systemd[1]: Stopped target System Initialization.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.296228] systemd[1]: Stopped target Swaps.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.298354] systemd[1]: Stopped target Timer Units.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.300272] systemd[1]: dbus.socket: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.302270] systemd[1]: Closed D-Bus System Message Bus Socket.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.304479] systemd[1]: initrd-find-nixos-closure.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.307385] systemd[1]: Stopped Find NixOS closure.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.309615] systemd[1]: Starting rw-sysroot-nix-store.service...
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.313280] systemd[1]: systemd-sysctl.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.316257] systemd[1]: Stopped Apply Kernel Variables.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.319724] systemd[1]: systemd-modules-load.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.324462] systemd[1]: Stopped Load Kernel Modules.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.327434] systemd[1]: systemd-tmpfiles-setup-sysroot.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.332633] systemd[1]: Stopped Create Volatile Files and Directories in the Real Root.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.336853] systemd[1]: systemd-tmpfiles-setup.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.340382] systemd[1]: Stopped Create System Files and Directories.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.344441] systemd[1]: Stopped target Local File Systems.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.348178] systemd[1]: Stopped target Preparation for Local File Systems.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.351331] systemd[1]: systemd-udev-trigger.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.355748] systemd[1]: Stopped Coldplug All udev Devices.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.360372] systemd[1]: Stopping Rule-based Manager for Device Events and Files...
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.364778] systemd[1]: systemd-vconsole-setup.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.371859] systemd[1]: Stopped Virtual Console Setup.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.388713] systemd[1]: initrd-cleanup.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.396427] systemd[1]: Finished Cleaning Up and Shutting Down Daemons.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.401414] systemd[1]: systemd-udevd.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.404930] systemd[1]: Stopped Rule-based Manager for Device Events and Files.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.408588] systemd[1]: rw-sysroot-nix-store.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.412278] systemd[1]: Finished rw-sysroot-nix-store.service.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.420184] systemd[1]: systemd-udevd-varlink.socket: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.423204] systemd[1]: Closed udev Varlink Socket.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.426145] systemd[1]: Starting Cleanup udev Database...
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.429318] systemd[1]: systemd-tmpfiles-setup-dev.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.432076] systemd[1]: Stopped Create Static Device Nodes in /dev.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.434491] systemd[1]: systemd-tmpfiles-setup-dev-early.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.437854] systemd[1]: Stopped Create Static Device Nodes in /dev gracefully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.440266] systemd[1]: kmod-static-nodes.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.443248] systemd[1]: Stopped Create List of Static Device Nodes.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.463177] systemd[1]: initrd-udevadm-cleanup-db.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.467360] systemd[1]: Finished Cleanup udev Database.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.470379] systemd[1]: Reached target Switch Root.
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.475187] systemd[1]: Starting NixOS Activation...
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.568111] initrd-nixos-activation-start[189]: booting system configuration /nix/store/wsrlllf7r7l54q619lp4fx76hjj5wav5-nixos-system-machine-test
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.608697] initrd-nixos-activation-start[189]: running activation script...
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.846686] initrd-nixos-activation-start[212]: setting up /etc...
+vm-test-run-mihomo-dual-stack-uid> machine # [    5.998280] systemd[1]: initrd-nixos-activation.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    6.002123] systemd[1]: Finished NixOS Activation.
+vm-test-run-mihomo-dual-stack-uid> machine # [    6.004632] systemd[1]: Starting Switch Root...
+vm-test-run-mihomo-dual-stack-uid> machine # [    6.021569] systemd[1]: Switching root.
+vm-test-run-mihomo-dual-stack-uid> machine # [    6.515390] systemd-journald[65]: Received SIGTERM from PID 1 (systemd).
+vm-test-run-mihomo-dual-stack-uid> machine # [    6.617934] NET: Registered PF_VSOCK protocol family
+vm-test-run-mihomo-dual-stack-uid> machine # [    6.991787] systemd[1]: systemd 262 running in system mode (+PAM +AUDIT -SELINUX +APPARMOR +IMA +IPE +SMACK +SECCOMP -GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 +KMOD +LIBCRYPTSETUP +LIBCRYPTSETUP_PLUGINS +LIBFDISK +PCRE2 +PWQUALITY +P11KIT +QRENCODE +TPM2 +BZIP2 +LZ4 +XZ +ZLIB +ZSTD +BPF_FRAMEWORK -BTF -XKBCOMMON +UTMP +LIBARCHIVE)
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.019645] systemd[1]: Detected virtualization kvm.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.022400] systemd[1]: Detected architecture x86-64.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.024759] systemd[1]: Detected first boot.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.033174] systemd[1]: Initializing machine ID from random generator.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.148372] systemd[1]: bpf-restrict-fs: LSM BPF program attached
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.252446] systemd[1]: Applying preset policy.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.472742] systemd[1]: Populated /etc with preset unit settings.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.711865] systemd[1]: initrd-switch-root.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.714860] systemd[1]: Stopped initrd-switch-root.service.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.719062] systemd[1]: systemd-journald.service: Scheduled restart job, restart counter is at 1.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.722532] systemd[1]: Created slice Slice /system/getty.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.724908] systemd[1]: Created slice User and Session Slice.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.726808] systemd[1]: Started Dispatch Password Requests to Console Directory Watch.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.729254] systemd[1]: Started Forward Password Requests to Wall Directory Watch.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.731487] systemd[1]: Expecting device /dev/hvc0...
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.733166] systemd[1]: Expecting device /dev/ttyS0...
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.734850] systemd[1]: Reached target Local Encrypted Volumes.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.736874] systemd[1]: Stopped target initrd-fs.target.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.738659] systemd[1]: Stopped target initrd-root-fs.target.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.740387] systemd[1]: Stopped target initrd-switch-root.target.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.748485] systemd[1]: Reached target Virtual Machines and Containers.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.750317] systemd[1]: Reached target Path Units.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.751735] systemd[1]: Reached target Remote File Systems.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.753383] systemd[1]: Reached target Slice Units.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.754839] systemd[1]: Reached target Swaps.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.758209] systemd[1]: Listening on Query the User Interactively for a Password.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.762267] systemd[1]: Listening on Process Core Dump Socket.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.765218] systemd[1]: Listening on Credential Encryption/Decryption.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.768333] systemd[1]: Listening on Factory Reset Management.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.770182] systemd[1]: Listening on Hostname Service Socket.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.774689] systemd[1]: Starting Journal Log Access Socket...
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.776821] systemd[1]: Listening on Journal Audit Socket.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.780556] systemd[1]: Listening on Console Output Muting Service Socket.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.782600] systemd[1]: Listening on Userspace Out-Of-Memory (OOM) Killer Socket.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.784916] systemd[1]: TPM PCR Measurements skipped, unmet condition check ConditionSecurity=measured-os
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.787305] systemd[1]: Make TPM PCR Policy skipped, unmet condition check ConditionSecurity=measured-uki
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.794062] systemd[1]: Listening on Disk Repartitioning Service Socket.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.796444] systemd[1]: Listening on udev Varlink Socket.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.800537] systemd[1]: Mounting Huge Pages File System...
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.804508] systemd[1]: Mounting POSIX Message Queue File System...
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.815685] systemd[1]: Mounting Kernel Debug File System...
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.825015] systemd[1]: Mounting Kernel Trace File System...
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.836919] systemd[1]: Starting Create List of Static Device Nodes...
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.861469] systemd[1]: Starting Load Kernel Module configfs...
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.874680] systemd[1]: Load Kernel Module drm skipped, unmet condition check ConditionKernelModuleLoaded=!drm
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.883312] systemd[1]: Load Kernel Module efi_pstore skipped, unmet condition check ConditionKernelModuleLoaded=!efi_pstore
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.890870] systemd[1]: Load Kernel Module fuse skipped, unmet condition check ConditionKernelModuleLoaded=!fuse
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.912865] systemd[1]: Mounting FUSE Control File System...
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.915287] systemd[1]: Clear Stale Hibernate Storage Info skipped, unmet condition check ConditionPathExists=/sys/firmware/efi/efivars/HibernateLocation-8cf2644b-4b0b-428f-9387-6d876050dc67
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.933332] systemd[1]: Starting Journal Service...
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.947257] systemd[1]: Starting Load Kernel Modules...
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.965788] systemd[1]: Starting Userspace Out-Of-Memory (OOM) Killer...
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.980051] systemd[1]: Starting Remount Root and Kernel File Systems...
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.988317] systemd[1]: Early TPM SRK Setup skipped, unmet condition check ConditionSecurity=measured-os
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.011764] systemd[1]: Starting Coldplug All udev Devices...
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.029044] systemd-journald[283]: Collecting audit messages is enabled.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.039527] systemd[1]: Listening on Journal Log Access Socket.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.047433] systemd[1]: Mounted Huge Pages File System.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.057724] systemd[1]: Mounted POSIX Message Queue File System.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.071717] systemd[1]: Mounted Kernel Debug File System.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.079811] systemd[1]: Mounted Kernel Trace File System.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.081890] loop: module loaded
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.092937] systemd[1]: Finished Create List of Static Device Nodes.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.756598] systemd[1]: Queued start job for default target Multi-User System.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.106953] systemd[1]: Started Journal Service.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.764537] systemd[1]: systemd-journald.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.115090] tun: Universal TUN/TAP device driver, 1.6
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.772789] systemd-modules-load[284]: Inserted module 'loop'
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.782938] systemd[1]: modprobe@configfs.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.786889] systemd-modules-load[284]: Inserted module 'tun'
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.793906] systemd[1]: Finished Load Kernel Module configfs.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.799355] systemd[1]: Mounted FUSE Control File System.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.151251] EXT4-fs (vda): re-mounted 1fda5eed-50b8-4498-960b-3f2553a89bdb.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.815336] systemd[1]: Finished Load Kernel Modules.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.833133] systemd[1]: Finished Remount Root and Kernel File Systems.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.842941] systemd[1]: Listening on Disk Image Download Service Socket.
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.852145] systemd[1]: Mounting Kernel Configuration File System...
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.857361] systemd[1]: Starting Firewall...
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.864239] systemd[1]: Starting Flush Journal to Persistent Storage...
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.866669] systemd[1]: Platform Persistent Storage Archival skipped, unmet condition check ConditionDirectoryNotEmpty=/sys/fs/pstore
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.874152] systemd-oomd[286]: No swap; memory pressure usage will be degraded
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.898219] systemd[1]: Starting Load/Save OS Random Seed...
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.921139] systemd[1]: Starting Apply Kernel Variables...
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.944188] systemd[1]: Starting Create Static Device Nodes in /dev gracefully...
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.947915] systemd[1]: TPM SRK Setup skipped, unmet condition check ConditionSecurity=measured-os
+vm-test-run-mihomo-dual-stack-uid> machine # [    7.958131] systemd[1]: Started Userspace Out-Of-Memory (OOM) Killer.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.344652] systemd-journald[283]: Received client request to flush runtime journal.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.243332] systemd[1]: Finished Load/Save OS Random Seed.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.248516] systemd[1]: Reached target First Boot Complete.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.250436] systemd[1]: Mounted Kernel Configuration File System.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.252764] systemd[1]: Finished Apply Kernel Variables.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.255250] systemd[1]: Finished Create Static Device Nodes in /dev gracefully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.258304] systemd[1]: Starting Create Static Device Nodes in /dev...
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.264080] systemd[1]: Finished Flush Journal to Persistent Storage.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.315272] systemd[1]: Finished Coldplug All udev Devices.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.341706] systemd[1]: Finished Create Static Device Nodes in /dev.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.344331] systemd[1]: Reached target Preparation for Local File Systems.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.349528] systemd[1]: Starting Rule-based Manager for Device Events and Files...
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.371558] systemd[1]: Mounting /run/wrappers...
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.422553] systemd[1]: Mounted /run/wrappers.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.424419] systemd[1]: Reached target Local File Systems.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.429783] systemd[1]: Listening on Boot Loader Control Service Socket.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.439237] systemd[1]: Starting register-nix-paths.service...
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.446227] systemd[1]: Starting Create SUID/SGID Wrappers...
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.448862] systemd[1]: Update Boot Loader Random Seed skipped, no trigger condition checks were met.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.459882] systemd[1]: Starting Save Transient machine-id to Disk...
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.473571] systemd-udevd[327]: Using default interface naming scheme 'v261'.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.487150] systemd[1]: Starting Create System Files and Directories...
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.622865] systemd[1]: etc-machine\x2did.mount: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.629737] systemd[1]: Finished Save Transient machine-id to Disk.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.690748] systemd[1]: Finished Create System Files and Directories.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.703832] systemd[1]: Starting Rebuild Journal Catalog...
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.714209] systemd[1]: Starting Record System Boot/Shutdown in UTMP...
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.718367] systemd[1]: Started Rule-based Manager for Device Events and Files.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.834767] systemd[1]: Finished Record System Boot/Shutdown in UTMP.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.936595] systemd[1]: Finished Rebuild Journal Catalog.
+vm-test-run-mihomo-dual-stack-uid> machine # [    8.946386] systemd[1]: Starting Update is Completed...
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.024260] systemd[1]: Finished Update is Completed.
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.355976] systemd[1]: Load Kernel Module fuse skipped, unmet condition check ConditionKernelModuleLoaded=!fuse
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.419463] systemd[1]: suid-sgid-wrappers.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.429315] systemd[1]: Finished Create SUID/SGID Wrappers.
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.569446] systemd[1]: Condition check resulted in /dev/hvc0 being skipped.
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.588984] systemd[1]: Finished register-nix-paths.service.
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.590970] systemd[1]: Reached target System Initialization.
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.595834] systemd[1]: Started Discard unused filesystem blocks once a week.
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.598745] systemd[1]: Started Daily Cleanup of Temporary Directories.
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.602887] systemd[1]: Reached target Timer Units.
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.606377] systemd[1]: Listening on D-Bus System Message Bus Socket.
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.608550] systemd[1]: Listening on Nix Daemon Socket.
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.610338] systemd[1]: Listening on Virtual Machine and Container Registration Service Socket.
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.615388] systemd[1]: Reached target Socket Units.
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.617764] systemd[1]: Reached target Basic System.
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.621622] systemd[1]: Starting Import lastlog data into lastlog2 database...
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.629175] systemd[1]: Starting Name Service Cache Daemon (nsncd)...
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.645577] systemd[1]: Starting Post-Boot Actions...
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.667669] systemd[1]: Started Reset console on configuration changes.
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.697315] systemd[1]: Starting resolvconf update...
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.754301] (udev-worker)[425]: eth1: Config file /etc/systemd/network/40-eth1.link is applied to device based on potentially unpredictable interface name.
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.771496] (udev-worker)[420]: Network interface NamePolicy= disabled on kernel command line.
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.781338] (udev-worker)[425]: Network interface NamePolicy= disabled on kernel command line.
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.805941] systemd[1]: Finished Post-Boot Actions.
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.818274] nsncd[471]: Nov 05 15:35:13.148 INFO started, config: Config { ignored_request_types: {}, worker_count: 8, handoff_timeout: 10s }, path: "/var/run/nscd/socket"
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.837491] systemd[1]: Started Name Service Cache Daemon (nsncd).
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.850529] systemd[1]: Condition check resulted in /dev/ttyS0 being skipped.
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.854362] systemd[1]: Reached target Host and Network Name Lookups.
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.859585] systemd[1]: Reached target User and Group Name Lookups.
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.870384] systemd[1]: Started backdoor.service.
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.896559] systemd[1]: Starting D-Bus System Message Bus...
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.933556] systemd[1]: Starting User Login Management...
+vm-test-run-mihomo-dual-stack-uid> machine # [    9.950669] systemd[1]: Finished Import lastlog data into lastlog2 database.
+vm-test-run-mihomo-dual-stack-uid> machine # connecting to host...
+vm-test-run-mihomo-dual-stack-uid> [11.53s] machine: Guest shell says: b'Spawning backdoor root shell...\n'
+vm-test-run-mihomo-dual-stack-uid> [11.55s] machine: connected to guest root shell
+vm-test-run-mihomo-dual-stack-uid> [11.55s] machine: (connecting took 11.34 seconds)
+vm-test-run-mihomo-dual-stack-uid> [11.55s] machine: (finished: waiting for the VM to finish booting, in 11.34 seconds)
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.159291] dbus-broker-launch[506]: Looking up NSS user entry for 'systemd-timesync'...
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.175313] dbus-broker-launch[506]: NSS returned no entry for 'systemd-timesync'
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.178320] dbus-broker-launch[506]: Invalid user-name in /nix/store/b55yqrff7iwkqpd9v54y0lmf2s6jlgk9-system-path/share/dbus-1/system.d/org.freedesktop.timesync1.conf +16: user="systemd-timesync"
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.194077] systemd[1]: Stopped target Host and Network Name Lookups.
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.201189] systemd[1]: Stopping Host and Network Name Lookups...
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.203434] systemd[1]: Stopped target User and Group Name Lookups.
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.207936] systemd[1]: Stopping User and Group Name Lookups...
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.211776] systemd[1]: Stopping Name Service Cache Daemon (nsncd)...
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.217773] systemd[1]: nscd.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.225207] systemd[1]: Stopped Name Service Cache Daemon (nsncd).
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.266452] systemd[1]: Starting Name Service Cache Daemon (nsncd)...
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.269566] systemd[1]: Started D-Bus System Message Bus.
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.279450] systemd-logind[508]: New seat seat0.
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.291180] systemd[1]: Started User Login Management.
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.302157] systemd[1]: Condition check resulted in Virtio network device being skipped.
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.320476] systemd[1]: Starting linger-users.service...
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.334760] dbus-broker-launch[506]: Ready
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.381976] systemd[1]: Finished Firewall.
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.435937] nsncd[579]: Nov 05 15:35:13.767 INFO started, config: Config { ignored_request_types: {}, worker_count: 8, handoff_timeout: 10s }, path: "/var/run/nscd/socket"
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.487183] systemd[1]: Started Name Service Cache Daemon (nsncd).
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.495189] systemd[1]: Finished resolvconf update.
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.500677] systemd[1]: linger-users.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.504457] systemd[1]: Finished linger-users.service.
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.538057] systemd[1]: Reached target Preparation for Network.
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.543836] systemd[1]: Reached target Host and Network Name Lookups.
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.546132] systemd[1]: Reached target User and Group Name Lookups.
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.556568] systemd[1]: Starting DHCP Client...
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.566207] systemd[1]: Starting Address configuration of eth1...
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.581948] systemd[1]: Starting Extra networking commands....
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.031369] mousedev: PS/2 mouse device common for all mice
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.067300] bochs-drm 0000:00:01.0: vgaarb: deactivate vga console
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.076829] input: Power Button as /devices/platform/LNXPWRBN:00/input/input3
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.763189] network-addresses-eth1-start[614]: adding address 192.168.1.1/24... done
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.827329] network-addresses-eth1-start[614]: adding address 2001:db8:1::1/64... done
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.882534] systemd[1]: Finished Address configuration of eth1.
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.144447] ACPI: button: Power Button [PWRF]
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.204327] input: QEMU Virtio Keyboard as /devices/pci0000:00/0000:00:06.0/virtio4/input/input4
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.250988] Console: switching to colour dummy device 80x25
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.981752] dhcpcd[624]: dhcpcd-10.3.2 starting
+vm-test-run-mihomo-dual-stack-uid> machine # [   10.988966] dhcpcd[678]: dev: loaded udev
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.008515] systemd[1]: Finished Extra networking commands..
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.013523] systemd[1]: Reached target Network.
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.019511] systemd[1]: Starting mihomo.service...
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.031203] systemd[1]: Starting Permit User Sessions...
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.374116] 8021q: 802.1Q VLAN Support v1.8
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.374126] 8021q: adding VLAN 0 to HW filter on device eth1
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.429650] rtc_cmos PNP0B00:00: RTC can wake from S4
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.111337] systemd[1]: Finished Permit User Sessions.
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.458756] rtc_cmos PNP0B00:00: registered as rtc0
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.122262] systemd[1]: Started Getty on tty1.
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.129752] systemd[1]: Reached target Login Prompts.
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.480370] [drm] Found bochs VGA, ID 0xb0c5.
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.487519] rtc_cmos PNP0B00:00: setting system clock to 2026-11-05T15:35:14 UTC (1793892914)
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.500261] [drm] Framebuffer size 16384 kB @ 0xfd000000, mmio @ 0xfebd0000.
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.161241] systemd[1]: Started mihomo.service.
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.527475] parport_pc 00:02: reported by Plug and Play ACPI
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.529049] parport0: PC-style at 0x378, irq 7 [PCSPP(,...)]
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.542519] rtc_cmos PNP0B00:00: alarms up to one day, y3k, 242 bytes nvram, hpet irqs
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.547443] bochs-drm 0000:00:01.0: [drm] Registered 1 planes with drm panic
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.548961] [drm] Initialized bochs-drm 1.0.0 for 0000:00:01.0 on minor 0
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.573283] lpc_ich 0000:00:1f.0: I/O space for GPIO uninitialized
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.681382] cfg80211: Loading compiled-in X.509 certificates for regulatory database
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.682725] Loaded X.509 cert 'sforshee: 00b28ddf47aef9cea7'
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.682856] Loaded X.509 cert 'wens: 61c038651aabdcf94bd0ac7ff06c7248db18c600'
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.685039] faux_driver regulatory: Direct firmware load for regulatory.db failed with error -2
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.685044] cfg80211: failed to load regulatory.db
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.761456] Console: switching to colour frame buffer device 160x50
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.502547] dhcpcd[678]: eth0: waiting for carrier
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.505316] dhcpcd[678]: eth0: carrier acquired
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.782924] i801_smbus 0000:00:1f.3: SMBus using PCI interrupt
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.783062] i2c i2c-0: Memory type 0x07 not supported yet, not instantiating SPD
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.832402] input: VirtualPS/2 VMware VMMouse as /devices/platform/i8042/serio1/input/input6
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.832888] input: VirtualPS/2 VMware VMMouse as /devices/platform/i8042/serio1/input/input5
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.847397] 8021q: adding VLAN 0 to HW filter on device eth0
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.880303] bochs-drm 0000:00:01.0: [drm] fb0: bochs-drmdrmfb frame buffer device
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.542451] dhcpcd[678]: DUID 00:01:00:01:32:7f:5e:b2:52:54:00:12:34:56
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.544900] dhcpcd[678]: eth0: IAID 00:12:34:56
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.546862] dhcpcd[678]: eth0: adding address fe80::5054:ff:fe12:3456
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.907126] RAPL PMU: API unit is 2^-32 Joules, 0 fixed counters, 10737418240 ms ovfl timer
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.792340] mihomo[690]: time="2026-11-05T15:35:15.149410749Z" level=info msg="Start initial configuration in progress"
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.799343] mihomo[690]: time="2026-11-05T15:35:15.156715308Z" level=info msg="Geodata Loader mode: memconservative"
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.805272] mihomo[690]: time="2026-11-05T15:35:15.156779562Z" level=info msg="Geosite Matcher implementation: succinct"
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.808571] mihomo[690]: time="2026-11-05T15:35:15.160406001Z" level=info msg="Initial configuration complete, total time: 5ms"
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.901201] mihomo[690]: time="2026-11-05T15:35:15.258406445Z" level=info msg="Sniffer is closed"
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.910569] mihomo[690]: time="2026-11-05T15:35:15.267936148Z" level=error msg="[TUN] default interface lost by monitor"
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.919151] mihomo[690]: time="2026-11-05T15:35:15.276318219Z" level=info msg="[TUN] Tun adapter listening at: Meta([198.18.0.1/30],[]), mtu: 9000, auto route: true, auto redir: false, ip stack: System, dns mode: "
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.940741] dbus-broker-launch[506]: Activation request for 'org.freedesktop.resolve1' failed: The systemd unit 'dbus-org.freedesktop.resolve1.service' could not be found.
+vm-test-run-mihomo-dual-stack-uid> machine # [   11.949886] mihomo[690]: time="2026-11-05T15:35:15.307165715Z" level=info msg="Start initial compatible provider default"
+vm-test-run-mihomo-dual-stack-uid> machine # [   12.021711] systemd[1]: Starting Virtual Console Setup...
+vm-test-run-mihomo-dual-stack-uid> machine # [   12.114498] systemd-logind[508]: Watching system buttons on /dev/input/event0 (AT Translated Set 2 keyboard)
+vm-test-run-mihomo-dual-stack-uid> machine # [   12.140626] systemd-logind[508]: Watching system buttons on /dev/input/event2 (Power Button)
+vm-test-run-mihomo-dual-stack-uid> machine # [   12.154869] systemd[1]: systemd-vconsole-setup.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [   12.159541] systemd[1]: Stopped Virtual Console Setup.
+vm-test-run-mihomo-dual-stack-uid> machine # [   12.179383] systemd[1]: Listening on Load/Save RF Kill Switch Status /dev/rfkill Watch.
+vm-test-run-mihomo-dual-stack-uid> machine # [   12.187568] systemd[1]: Starting Virtual Console Setup...
+vm-test-run-mihomo-dual-stack-uid> machine # [   12.219469] systemd-logind[508]: Watching system buttons on /dev/input/event3 (QEMU Virtio Keyboard)
+vm-test-run-mihomo-dual-stack-uid> machine # [   12.616983] ppdev: user-space parallel port driver
+vm-test-run-mihomo-dual-stack-uid> machine # [   12.639999] iTCO_wdt iTCO_wdt.1.auto: Found a ICH9 TCO device (Version=2, TCOBASE=0x0660)
+vm-test-run-mihomo-dual-stack-uid> machine # [   12.318187] systemd[1]: systemd-vconsole-setup.service: Deactivated successfully.
+vm-test-run-mihomo-dual-stack-uid> machine # [   12.321339] systemd[1]: Stopped Virtual Console Setup.
+vm-test-run-mihomo-dual-stack-uid> machine # [   12.331863] systemd[1]: Starting Virtual Console Setup...
+vm-test-run-mihomo-dual-stack-uid> machine # [   12.701395] iTCO_wdt iTCO_wdt.1.auto: initialized. heartbeat=30 sec (nowayout=0)
+vm-test-run-mihomo-dual-stack-uid> machine # [   12.383364] (udev-worker)[718]: Network interface NamePolicy= disabled on kernel command line.
+vm-test-run-mihomo-dual-stack-uid> machine # [   12.455157] dhcpcd[678]: Meta: IAID 4d:65:74:61
+vm-test-run-mihomo-dual-stack-uid> machine # [   12.456913] dhcpcd[678]: Meta: waiting for 3rd party to configure IP address
+vm-test-run-mihomo-dual-stack-uid> machine # [   12.565675] systemd-vconsole-setup[744]: Configuration of first virtual console was skipped, ignoring remaining ones.
+vm-test-run-mihomo-dual-stack-uid> machine # [   12.571339] systemd[1]: Finished Virtual Console Setup.
+vm-test-run-mihomo-dual-stack-uid> machine # [   13.218466] dhcpcd[678]: eth0: soliciting a DHCP lease
+vm-test-run-mihomo-dual-stack-uid> machine # [   13.601296] NET: Registered PF_PACKET protocol family
+vm-test-run-mihomo-dual-stack-uid> machine # [   13.262952] dhcpcd[678]: eth0: offered 10.0.2.15 from 10.0.2.2
+vm-test-run-mihomo-dual-stack-uid> machine # [   13.266342] dhcpcd[678]: eth0: probing address 10.0.2.15/24
+vm-test-run-mihomo-dual-stack-uid> machine # [   13.593709] dhcpcd[678]: eth0: soliciting an IPv6 router
+vm-test-run-mihomo-dual-stack-uid> machine # [   13.605227] dhcpcd[678]: eth0: Router Advertisement from fe80::2
+vm-test-run-mihomo-dual-stack-uid> machine # [   13.614944] dhcpcd[678]: eth0: adding address fec0::5054:ff:fe12:3456/64
+vm-test-run-mihomo-dual-stack-uid> machine # [   13.623861] dhcpcd[678]: eth0: adding route to fec0::/64
+vm-test-run-mihomo-dual-stack-uid> machine # [   13.628138] dhcpcd[678]: eth0: adding default route via fe80::2
+vm-test-run-mihomo-dual-stack-uid> machine # [   13.933298] mihomo[690]: time="2026-11-05T15:35:17.286569242Z" level=warning msg="[TUN] default interface changed by monitor, => eth0"
+vm-test-run-mihomo-dual-stack-uid> machine # [   18.640463] dhcpcd[678]: eth0: leased 10.0.2.15 for 86400 seconds
+vm-test-run-mihomo-dual-stack-uid> machine # [   18.653313] dhcpcd[678]: eth0: adding route to 10.0.2.0/24
+vm-test-run-mihomo-dual-stack-uid> machine # [   18.666316] dhcpcd[678]: eth0: adding default route via 10.0.2.2
+vm-test-run-mihomo-dual-stack-uid> machine # [   18.769786] systemd[1]: Started DHCP Client.
+vm-test-run-mihomo-dual-stack-uid> machine # [   18.773835] systemd[1]: Reached target Multi-User System.
+vm-test-run-mihomo-dual-stack-uid> machine # [   18.776332] systemd[1]: Startup finished in 1.292s (kernel) + 4.946s (initrd) + 12.536s (userspace) = 18.775s.
+vm-test-run-mihomo-dual-stack-uid> machine # [   18.955643] mihomo[690]: time="2026-11-05T15:35:22.308106336Z" level=warning msg="[TUN] default interface changed by monitor, => eth0"
+vm-test-run-mihomo-dual-stack-uid> [20.89s] machine: (finished: waiting for unit multi-user.target, in 20.67 seconds)
+vm-test-run-mihomo-dual-stack-uid> [20.89s] machine: waiting for unit mihomo.service
+vm-test-run-mihomo-dual-stack-uid> [20.92s] machine: (finished: waiting for unit mihomo.service, in 0.03 seconds)
+vm-test-run-mihomo-dual-stack-uid> === [diag] ip link ===
+vm-test-run-mihomo-dual-stack-uid> [20.92s] machine: must succeed: ip link
+vm-test-run-mihomo-dual-stack-uid> [20.94s] machine: (finished: must succeed: ip link, in 0.02 seconds)
+vm-test-run-mihomo-dual-stack-uid> 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+vm-test-run-mihomo-dual-stack-uid>     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+vm-test-run-mihomo-dual-stack-uid> 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
+vm-test-run-mihomo-dual-stack-uid>     link/ether 52:54:00:12:34:56 brd ff:ff:ff:ff:ff:ff
+vm-test-run-mihomo-dual-stack-uid>     altname enp0s2
+vm-test-run-mihomo-dual-stack-uid>     altname enx525400123456
+vm-test-run-mihomo-dual-stack-uid> 3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
+vm-test-run-mihomo-dual-stack-uid>     link/ether 52:54:00:12:01:01 brd ff:ff:ff:ff:ff:ff
+vm-test-run-mihomo-dual-stack-uid> 4: Meta: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 9000 qdisc fq_codel state UNKNOWN mode DEFAULT group default qlen 500
+vm-test-run-mihomo-dual-stack-uid>     link/none
+vm-test-run-mihomo-dual-stack-uid> 
+vm-test-run-mihomo-dual-stack-uid> === [diag] mihomo journal ===
+vm-test-run-mihomo-dual-stack-uid> [20.94s] machine: must succeed: journalctl -u mihomo.service -n 120 --no-pager
+vm-test-run-mihomo-dual-stack-uid> [20.96s] machine: (finished: must succeed: journalctl -u mihomo.service -n 120 --no-pager, in 0.02 seconds)
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:14 machine systemd[1]: Starting mihomo.service...
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:14 machine systemd[1]: Started mihomo.service.
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:15 machine mihomo[690]: time="2026-11-05T15:35:15.149410749Z" level=info msg="Start initial configuration in progress"
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:15 machine mihomo[690]: time="2026-11-05T15:35:15.156715308Z" level=info msg="Geodata Loader mode: memconservative"
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:15 machine mihomo[690]: time="2026-11-05T15:35:15.156779562Z" level=info msg="Geosite Matcher implementation: succinct"
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:15 machine mihomo[690]: time="2026-11-05T15:35:15.160406001Z" level=info msg="Initial configuration complete, total time: 5ms"
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:15 machine mihomo[690]: time="2026-11-05T15:35:15.258406445Z" level=info msg="Sniffer is closed"
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:15 machine mihomo[690]: time="2026-11-05T15:35:15.267936148Z" level=error msg="[TUN] default interface lost by monitor"
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:15 machine mihomo[690]: time="2026-11-05T15:35:15.276318219Z" level=info msg="[TUN] Tun adapter listening at: Meta([198.18.0.1/30],[]), mtu: 9000, auto route: true, auto redir: false, ip stack: System, dns mode: "
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:15 machine mihomo[690]: time="2026-11-05T15:35:15.307165715Z" level=info msg="Start initial compatible provider default"
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:17 machine mihomo[690]: time="2026-11-05T15:35:17.286569242Z" level=warning msg="[TUN] default interface changed by monitor, => eth0"
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:22 machine mihomo[690]: time="2026-11-05T15:35:22.308106336Z" level=warning msg="[TUN] default interface changed by monitor, => eth0"
+vm-test-run-mihomo-dual-stack-uid> 
+vm-test-run-mihomo-dual-stack-uid> ??? Warning (UserWarning): wait_until_succeeds(): passing a bare int/float as a duration is deprecated. Use datetime.timedelta instead.
+vm-test-run-mihomo-dual-stack-uid>     File "/nix/store/6gdzfy0z82xalw4qmiv23z9gs907jmik-nixos-test-driver-1.1/lib/python3.14/site-packages/test_driver/duration.py", line 39
+vm-test-run-mihomo-dual-stack-uid> [20.96s] machine: waiting for success: ip link | grep -qE 'tun|Meta'
+vm-test-run-mihomo-dual-stack-uid> ??? Warning (UserWarning): execute(): passing a bare int/float as a duration is deprecated. Use datetime.timedelta instead.
+vm-test-run-mihomo-dual-stack-uid>     File "/nix/store/6gdzfy0z82xalw4qmiv23z9gs907jmik-nixos-test-driver-1.1/lib/python3.14/site-packages/test_driver/duration.py", line 39
+vm-test-run-mihomo-dual-stack-uid> [20.99s] machine: (finished: waiting for success: ip link | grep -qE 'tun|Meta', in 0.03 seconds)
+vm-test-run-mihomo-dual-stack-uid> === ip rule ===
+vm-test-run-mihomo-dual-stack-uid> [20.99s] machine: must succeed: ip rule show
+vm-test-run-mihomo-dual-stack-uid> [21.01s] machine: (finished: must succeed: ip rule show, in 0.02 seconds)
+vm-test-run-mihomo-dual-stack-uid> 0:   from all lookup local
+vm-test-run-mihomo-dual-stack-uid> 9000:        from all to 198.18.0.0/30 lookup 2200
+vm-test-run-mihomo-dual-stack-uid> 9001:        not from all dport 53 lookup main suppress_prefixlength 0
+vm-test-run-mihomo-dual-stack-uid> 9001:        from all iif Meta goto 9010
+vm-test-run-mihomo-dual-stack-uid> 9002:        not from all iif lo lookup 2200
+vm-test-run-mihomo-dual-stack-uid> 9002:        from 0.0.0.0 iif lo lookup 2200
+vm-test-run-mihomo-dual-stack-uid> 9002:        from 198.18.0.0/30 iif lo lookup 2200
+vm-test-run-mihomo-dual-stack-uid> 9010:        from all nop
+vm-test-run-mihomo-dual-stack-uid> 32766:       from all lookup main
+vm-test-run-mihomo-dual-stack-uid> 32767:       from all lookup default
+vm-test-run-mihomo-dual-stack-uid> 
+vm-test-run-mihomo-dual-stack-uid> [21.01s] machine: must succeed: cat > /tmp/a.py <<'PYEOF'
+vm-test-run-mihomo-dual-stack-uid> import socket,time
+vm-test-run-mihomo-dual-stack-uid> s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+vm-test-run-mihomo-dual-stack-uid> s.sendto(b'x',('1.1.1.1',9999))
+vm-test-run-mihomo-dual-stack-uid> print(s.getsockname())
+vm-test-run-mihomo-dual-stack-uid> time.sleep(5)
+vm-test-run-mihomo-dual-stack-uid> PYEOF
+vm-test-run-mihomo-dual-stack-uid> 
+vm-test-run-mihomo-dual-stack-uid> [21.03s] machine: (finished: must succeed: cat > /tmp/a.py <<'PYEOF'
+vm-test-run-mihomo-dual-stack-uid> import socket,time
+vm-test-run-mihomo-dual-stack-uid> s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+vm-test-run-mihomo-dual-stack-uid> s.sendto(b'x',('1.1.1.1',9999))
+vm-test-run-mihomo-dual-stack-uid> print(s.getsockname())
+vm-test-run-mihomo-dual-stack-uid> time.sleep(5)
+vm-test-run-mihomo-dual-stack-uid> PYEOF
+vm-test-run-mihomo-dual-stack-uid> , in 0.02 seconds)
+vm-test-run-mihomo-dual-stack-uid> === running A (AF_INET) as alice ===
+vm-test-run-mihomo-dual-stack-uid> [21.03s] machine: must succeed: runuser -u alice -- python3 /tmp/a.py
+vm-test-run-mihomo-dual-stack-uid> machine # [   19.609827] runuser[900]: pam_unix(runuser:session): session opened for user alice(uid=1001) by (uid=0)
+vm-test-run-mihomo-dual-stack-uid> machine # [   19.698909] mihomo[690]: time="2026-11-05T15:35:23.056433568Z" level=debug msg="[Rule] use default rules"
+vm-test-run-mihomo-dual-stack-uid> machine # [   19.703285] mihomo[690]: time="2026-11-05T15:35:23.060620413Z" level=debug msg="[TUN] Auto detect interface for 1.1.1.1 --> eth0"
+vm-test-run-mihomo-dual-stack-uid> machine # [   19.707753] mihomo[690]: time="2026-11-05T15:35:23.064969010Z" level=info msg="[UDP] 198.18.0.1:34518(python3.14, uid=1001) --> 1.1.1.1:9999 match Match using DIRECT"
+vm-test-run-mihomo-dual-stack-uid> machine # [   24.703945] runuser[900]: pam_unix(runuser:session): session closed for user alice
+vm-test-run-mihomo-dual-stack-uid> [26.15s] machine: (finished: must succeed: runuser -u alice -- python3 /tmp/a.py, in 5.13 seconds)
+vm-test-run-mihomo-dual-stack-uid> ('0.0.0.0', 34518)
+vm-test-run-mihomo-dual-stack-uid> 
+vm-test-run-mihomo-dual-stack-uid> [26.15s] machine: must succeed: cat > /tmp/b.py <<'PYEOF'
+vm-test-run-mihomo-dual-stack-uid> import socket,time
+vm-test-run-mihomo-dual-stack-uid> s=socket.socket(socket.AF_INET6,socket.SOCK_DGRAM)
+vm-test-run-mihomo-dual-stack-uid> s.sendto(b'x',('::ffff:1.1.1.1',9999))
+vm-test-run-mihomo-dual-stack-uid> print(s.getsockname())
+vm-test-run-mihomo-dual-stack-uid> time.sleep(5)
+vm-test-run-mihomo-dual-stack-uid> PYEOF
+vm-test-run-mihomo-dual-stack-uid> 
+vm-test-run-mihomo-dual-stack-uid> [26.18s] machine: (finished: must succeed: cat > /tmp/b.py <<'PYEOF'
+vm-test-run-mihomo-dual-stack-uid> import socket,time
+vm-test-run-mihomo-dual-stack-uid> s=socket.socket(socket.AF_INET6,socket.SOCK_DGRAM)
+vm-test-run-mihomo-dual-stack-uid> s.sendto(b'x',('::ffff:1.1.1.1',9999))
+vm-test-run-mihomo-dual-stack-uid> print(s.getsockname())
+vm-test-run-mihomo-dual-stack-uid> time.sleep(5)
+vm-test-run-mihomo-dual-stack-uid> PYEOF
+vm-test-run-mihomo-dual-stack-uid> , in 0.02 seconds)
+vm-test-run-mihomo-dual-stack-uid> === running B (AF_INET6 dual-stack) as alice ===
+vm-test-run-mihomo-dual-stack-uid> [26.18s] machine: must succeed: runuser -u alice -- python3 /tmp/b.py
+vm-test-run-mihomo-dual-stack-uid> machine # [   24.755310] runuser[912]: pam_unix(runuser:session): session opened for user alice(uid=1001) by (uid=0)
+vm-test-run-mihomo-dual-stack-uid> machine # [   24.797364] mihomo[690]: time="2026-11-05T15:35:28.153879192Z" level=debug msg="[Process] find process error for 1.1.1.1: process not found"
+vm-test-run-mihomo-dual-stack-uid> machine # [   24.801667] mihomo[690]: time="2026-11-05T15:35:28.153969427Z" level=debug msg="[Rule] use default rules"
+vm-test-run-mihomo-dual-stack-uid> machine # [   24.804896] mihomo[690]: time="2026-11-05T15:35:28.154096538Z" level=debug msg="[TUN] Auto detect interface for 1.1.1.1 --> eth0"
+vm-test-run-mihomo-dual-stack-uid> machine # [   24.808176] mihomo[690]: time="2026-11-05T15:35:28.154193198Z" level=info msg="[UDP] 198.18.0.1:46635 --> 1.1.1.1:9999 match Match using DIRECT"
+vm-test-run-mihomo-dual-stack-uid> machine # [   29.812711] runuser[912]: pam_unix(runuser:session): session closed for user alice
+vm-test-run-mihomo-dual-stack-uid> [31.26s] machine: (finished: must succeed: runuser -u alice -- python3 /tmp/b.py, in 5.09 seconds)
+vm-test-run-mihomo-dual-stack-uid> ('::', 46635, 0, 0)
+vm-test-run-mihomo-dual-stack-uid> 
+vm-test-run-mihomo-dual-stack-uid> === mihomo full log (find-process results) ===
+vm-test-run-mihomo-dual-stack-uid> [31.26s] machine: must succeed: journalctl -u mihomo.service --no-pager
+vm-test-run-mihomo-dual-stack-uid> [31.30s] machine: (finished: must succeed: journalctl -u mihomo.service --no-pager, in 0.03 seconds)
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:14 machine systemd[1]: Starting mihomo.service...
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:14 machine systemd[1]: Started mihomo.service.
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:15 machine mihomo[690]: time="2026-11-05T15:35:15.149410749Z" level=info msg="Start initial configuration in progress"
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:15 machine mihomo[690]: time="2026-11-05T15:35:15.156715308Z" level=info msg="Geodata Loader mode: memconservative"
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:15 machine mihomo[690]: time="2026-11-05T15:35:15.156779562Z" level=info msg="Geosite Matcher implementation: succinct"
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:15 machine mihomo[690]: time="2026-11-05T15:35:15.160406001Z" level=info msg="Initial configuration complete, total time: 5ms"
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:15 machine mihomo[690]: time="2026-11-05T15:35:15.258406445Z" level=info msg="Sniffer is closed"
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:15 machine mihomo[690]: time="2026-11-05T15:35:15.267936148Z" level=error msg="[TUN] default interface lost by monitor"
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:15 machine mihomo[690]: time="2026-11-05T15:35:15.276318219Z" level=info msg="[TUN] Tun adapter listening at: Meta([198.18.0.1/30],[]), mtu: 9000, auto route: true, auto redir: false, ip stack: System, dns mode: "
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:15 machine mihomo[690]: time="2026-11-05T15:35:15.307165715Z" level=info msg="Start initial compatible provider default"
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:17 machine mihomo[690]: time="2026-11-05T15:35:17.286569242Z" level=warning msg="[TUN] default interface changed by monitor, => eth0"
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:22 machine mihomo[690]: time="2026-11-05T15:35:22.308106336Z" level=warning msg="[TUN] default interface changed by monitor, => eth0"
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:23 machine mihomo[690]: time="2026-11-05T15:35:23.056433568Z" level=debug msg="[Rule] use default rules"
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:23 machine mihomo[690]: time="2026-11-05T15:35:23.060620413Z" level=debug msg="[TUN] Auto detect interface for 1.1.1.1 --> eth0"
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:23 machine mihomo[690]: time="2026-11-05T15:35:23.064969010Z" level=info msg="[UDP] 198.18.0.1:34518(python3.14, uid=1001) --> 1.1.1.1:9999 match Match using DIRECT"
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:28 machine mihomo[690]: time="2026-11-05T15:35:28.153879192Z" level=debug msg="[Process] find process error for 1.1.1.1: process not found"
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:28 machine mihomo[690]: time="2026-11-05T15:35:28.153969427Z" level=debug msg="[Rule] use default rules"
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:28 machine mihomo[690]: time="2026-11-05T15:35:28.154096538Z" level=debug msg="[TUN] Auto detect interface for 1.1.1.1 --> eth0"
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:28 machine mihomo[690]: time="2026-11-05T15:35:28.154193198Z" level=info msg="[UDP] 198.18.0.1:46635 --> 1.1.1.1:9999 match Match using DIRECT"
+vm-test-run-mihomo-dual-stack-uid> 
+vm-test-run-mihomo-dual-stack-uid> === grep: uid / process-not-found lines ===
+vm-test-run-mihomo-dual-stack-uid> [31.30s] machine: must succeed: journalctl -u mihomo.service --no-pager | grep -iE 'uid|process' | tail -80
+vm-test-run-mihomo-dual-stack-uid> [31.33s] machine: (finished: must succeed: journalctl -u mihomo.service --no-pager | grep -iE 'uid|process' | tail -80, in 0.03 seconds)
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:23 machine mihomo[690]: time="2026-11-05T15:35:23.064969010Z" level=info msg="[UDP] 198.18.0.1:34518(python3.14, uid=1001) --> 1.1.1.1:9999 match Match using DIRECT"
+vm-test-run-mihomo-dual-stack-uid> Nov 05 15:35:28 machine mihomo[690]: time="2026-11-05T15:35:28.153879192Z" level=debug msg="[Process] find process error for 1.1.1.1: process not found"
+vm-test-run-mihomo-dual-stack-uid> 
+vm-test-run-mihomo-dual-stack-uid> [31.33s] (finished: run the VM test script, in 31.32 seconds)
+vm-test-run-mihomo-dual-stack-uid> [31.38s] test script finished in 31.37s
+vm-test-run-mihomo-dual-stack-uid> [31.38s] cleanup
+vm-test-run-mihomo-dual-stack-uid> [31.38s] kill QemuMachine (pid 46)
+vm-test-run-mihomo-dual-stack-uid> machine # qemu-system-x86_64: terminating on signal 15 from pid 39 (/nix/store/xahxrjs30p3mw0a42bqg9ikgkikskw8m-python3-3.14.8/bin/python3.14)
+vm-test-run-mihomo-dual-stack-uid> machine # [2026-11-05T15:35:33Z INFO  virtiofsd] Client disconnected, shutting down
+vm-test-run-mihomo-dual-stack-uid> machine # [2026-11-05T15:35:33Z INFO  virtiofsd] Client disconnected, shutting down
+vm-test-run-mihomo-dual-stack-uid> machine # [2026-11-05T15:35:33Z INFO  virtiofsd] Client disconnected, shutting down
+vm-test-run-mihomo-dual-stack-uid> [31.48s] (finished: cleanup, in 0.11 seconds)
