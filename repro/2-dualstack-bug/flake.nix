@@ -11,8 +11,8 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      checks.${system}.dualstackBug = pkgs.testers.runNixOSTest {
-        name = "mihomo-uid-dualstack-bug";
+      checks.${system}.default = pkgs.testers.runNixOSTest {
+        name = "mihomo-uid-test";
         nodes.machine = ./machine.nix;
 
         testScript = ''
@@ -22,23 +22,22 @@
           machine.wait_until_succeeds("ip link | grep -qE 'tun|Meta'", timeout=60)
 
           # B：双栈 IPv6 socket（AF_INET6，IPV6_V6ONLY=0 默认），发 UDP 到 IPv4-mapped 地址
-          b = (
+          script = (
             "import socket,time\n"
             "s=socket.socket(socket.AF_INET6,socket.SOCK_DGRAM)\n"
             "s.sendto(b'x',('::ffff:1.1.1.1',9999))\n"
             "print(s.getsockname())\n"
             "time.sleep(5)\n"
           )
-          machine.succeed("cat > /tmp/b.py <<'PYEOF'\n" + b + "PYEOF\n")
-          print("=== running AF_INET6 dual-stack script as alice (uid 1001) ===")
-          print(machine.succeed("runuser -u alice -- python3 /tmp/b.py"))
+          machine.succeed("cat > /tmp/test.py <<'PYEOF'\n" + script + "PYEOF\n")
+          print("=== running script as alice (uid 1001) ===")
+          print(machine.succeed("runuser -u alice -- python3 /tmp/test.py"))
 
-          print("=== mihomo log (expect process not found) ===")
+          print("=== mihomo log ===")
           print(machine.succeed("journalctl -u mihomo.service --no-pager | grep -iE 'uid|process' | tail -20"))
 
-          # 断言：日志里出现 process not found（bug 复现）
+          machine.fail("journalctl -u mihomo.service --no-pager | grep 'uid=1001'")
           machine.succeed("journalctl -u mihomo.service --no-pager | grep 'process not found'")
-          print("OK: dual-stack socket NOT resolved (process not found) -> bug reproduced")
         '';
       };
     };

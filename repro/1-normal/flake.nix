@@ -11,8 +11,8 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      checks.${system}.normal = pkgs.testers.runNixOSTest {
-        name = "mihomo-uid-normal-af-inet";
+      checks.${system}.default = pkgs.testers.runNixOSTest {
+        name = "mihomo-uid-test";
         nodes.machine = ./machine.nix;
 
         testScript = ''
@@ -22,23 +22,22 @@
           machine.wait_until_succeeds("ip link | grep -qE 'tun|Meta'", timeout=60)
 
           # A：普通 IPv4 socket（AF_INET），发 UDP 到 IPv4 地址
-          a = (
+          script = (
             "import socket,time\n"
             "s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)\n"
             "s.sendto(b'x',('1.1.1.1',9999))\n"
             "print(s.getsockname())\n"
             "time.sleep(5)\n"
           )
-          machine.succeed("cat > /tmp/a.py <<'PYEOF'\n" + a + "PYEOF\n")
-          print("=== running AF_INET script as alice (uid 1001) ===")
-          print(machine.succeed("runuser -u alice -- python3 /tmp/a.py"))
+          machine.succeed("cat > /tmp/test.py <<'PYEOF'\n" + script + "PYEOF\n")
+          print("=== running script as alice (uid 1001) ===")
+          print(machine.succeed("runuser -u alice -- python3 /tmp/test.py"))
 
-          print("=== mihomo log (expect uid=1001) ===")
+          print("=== mihomo log ===")
           print(machine.succeed("journalctl -u mihomo.service --no-pager | grep -iE 'uid|process' | tail -20"))
 
-          # 断言：日志里能拿到 uid=1001（正常情况）
           machine.succeed("journalctl -u mihomo.service --no-pager | grep 'uid=1001'")
-          print("OK: AF_INET socket resolved uid=1001 (no bug)")
+          machine.fail("journalctl -u mihomo.service --no-pager | grep 'process not found'")
         '';
       };
     };
