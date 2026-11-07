@@ -1,108 +1,209 @@
 { config, lib, pkgs, ... }:
 
 let
-  # =====================================================================
-  # 系统级 mihomo：每个用户一个 listeners/tun，include-uid 分流 + proxy 直连
-  # （不查进程）。同时承担 fake-ip DNS，把真实域名下发给 per-user mihomo。
-  # =====================================================================
-  mihomo-system-config = pkgs.writeText "mihomo-system.yaml" ''
-    log-level: debug
-    mode: rule
-    ipv6: false
-    dns:
-      enable: true
-      enhanced-mode: fake-ip
-      fake-ip-range: 198.18.0.1/16
-      hosts:
-        echo-alice.example.test: 192.168.50.2
-        echo-bob.example.test: 192.168.50.2
-      nameserver:
-        - 1.1.1.1
-    listeners:
-      - name: tun-alice
-        type: tun
-        device: tun-alice
-        stack: gvisor
-        auto-route: true
-        strict-route: true
-        dns-hijack: [any:53]
-        inet4-address: [198.19.0.1/30]
-        include-uid: [1001]
-        iproute2-table-index: 2100
-        iproute2-rule-index: 8000
-        proxy: alice-upstream
-      - name: tun-bob
-        type: tun
-        device: tun-bob
-        stack: gvisor
-        auto-route: true
-        strict-route: true
-        dns-hijack: [any:53]
-        inet4-address: [198.19.1.1/30]
-        include-uid: [1002]
-        iproute2-table-index: 2101
-        # 注意：sing-tun 的 iproute2-rule-index 是"锚点"，一个 tun 实际占用约
-        # N..N+3（并在 N+10 放 goto 目标）。两个 tun 的 rule-index 必须间隔足够大
-        # 否则规则串互相覆盖（alice=8000 与 bob=8001 就会在 8001/8002/8003 冲突）。
-        iproute2-rule-index: 8100
-        proxy: bob-upstream
-    proxies:
-      - name: alice-upstream
-        type: socks5
-        server: 127.0.0.1
-        port: 1080
-        udp: true
-      - name: bob-upstream
-        type: socks5
-        server: 127.0.0.1
-        port: 1081
-        udp: true
-  '';
+  yaml = pkgs.formats.yaml { };
 
-  # per-user mihomo：只放行自己的域名，其余 REJECT。用于强证明「域名下发」：
-  # 只有收到 *域名*（而非 IP / fake-ip）才会命中 DOMAIN 规则走 DIRECT。
-  mihomo-alice-config = pkgs.writeText "mihomo-alice.yaml" ''
-    log-level: debug
-    mode: rule
-    ipv6: false
-    dns:
-      enable: true
-      hosts:
-        echo-alice.example.test: 192.168.50.2
-      nameserver:
-        - 192.168.50.2
-    mixed-port: 1080
-    allow-lan: false
-    rules:
-      - DOMAIN,echo-alice.example.test,DIRECT
-      - MATCH,REJECT
-  '';
+  socketDirectory = "/run/user-tun";
+  controllerGroup = "user-tun-controller";
 
-  mihomo-bob-config = pkgs.writeText "mihomo-bob.yaml" ''
-    log-level: debug
-    mode: rule
-    ipv6: false
-    dns:
-      enable: true
-      hosts:
-        echo-bob.example.test: 192.168.50.2
-      nameserver:
-        - 192.168.50.2
-    mixed-port: 1081
-    allow-lan: false
-    rules:
-      - DOMAIN,echo-bob.example.test,DIRECT
-      - MATCH,REJECT
-  '';
+  # 每个用户一份：应用 uid、per-user 服务 uid、gost 桥接端口、tun 参数。
+  # 与 NixosErthane 的 user-tun + HomeAtErthane 的 gost.nix 结构对齐。
+  users = [
+    {
+      name = "alice";
+      uid = 1001;
+      svcName = "alicesvc";
+      svcUid = 1003;
+      gostPort = 43007;      # system gost 的 TCP 监听端口（system mihomo 的 socks5 指向这）
+      socksInPort = 16884;   # per-user mihomo 的 mixed 重入端口（per-user gost 的 tcp dial 指向这）
+      tun = "tun-alice";
+      table = 2100;
+      inet4 = "198.19.1.1/30";
+      peer = "198.19.1.2";
+    }
+    {
+      name = "bob";
+      uid = 1002;
+      svcName = "bobsvc";
+      svcUid = 1004;
+      gostPort = 43008;
+      socksInPort = 16885;
+      tun = "tun-bob";
+      table = 2101;
+      inet4 = "198.19.2.1/30";
+      peer = "198.19.2.2";
+    }
+  ];
+
+  svcUidRange = "${toString (lib.foldl' lib.min 65535 (map (u: u.svcUid) users))}-${toString (lib.foldl' lib.max 0 (map (u: u.svcUid) users))}";
+
+  dnsTable = 2000;
+  othersTable = 2200;
+
+  # =====================================================================
+  # system mihomo：全局 DNS 劫持 tun + 每用户 tun（proxy 直连 gost 端口）+ 兜底 tun
+  # =====================================================================
+  mihomoSystemConfig = yaml.generate "mihomo-system.yaml" {
+    mode = "rule";
+    log-level = "debug";
+    ipv6 = false;
+    dns = {
+      enable = true;
+      enhanced-mode = "fake-ip";
+      fake-ip-range = "198.18.0.1/16";
+      hosts = {
+        "echo-alice.example.test" = "192.168.50.2";
+        "echo-bob.example.test" = "192.168.50.2";
+      };
+      nameserver = [ "1.1.1.1" ];
+    };
+    listeners =
+      [
+        {
+          name = "tun-dns";
+          type = "tun";
+          device = "tun-dns";
+          stack = "gvisor";
+          auto-route = false;
+          dns-hijack = [ "any:53" ];
+          inet4-address = [ "198.19.0.1/30" ];
+        }
+      ]
+      ++ map (u: {
+        name = u.tun;
+        type = "tun";
+        device = u.tun;
+        stack = "gvisor";
+        auto-route = false;
+        inet4-address = [ u.inet4 ];
+        proxy = "user-${toString u.uid}";
+      }) users
+      ++ [
+        {
+          name = "tun-others";
+          type = "tun";
+          device = "tun-others";
+          stack = "gvisor";
+          auto-route = false;
+          inet4-address = [ "198.19.3.1/30" ];
+        }
+      ];
+    proxies = map (u: {
+      name = "user-${toString u.uid}";
+      type = "socks5";
+      server = "127.0.0.1";
+      port = u.gostPort;
+    }) users;
+    proxy-groups = [
+      {
+        name = "others";
+        type = "select";
+        proxies = [ "REJECT" "DIRECT" ] ++ (map (u: "user-${toString u.uid}") users);
+      }
+    ];
+    rules = [ "MATCH,others" ];
+  };
+
+  # =====================================================================
+  # system gost：每个用户一个 TCP listener，透传到对应 unix socket
+  # =====================================================================
+  gostSystemConfig = yaml.generate "gost-system.yaml" {
+    services = map (u: {
+      name = "user-${toString u.uid}";
+      addr = "127.0.0.1:${toString u.gostPort}";
+      handler = { type = "tcp"; chain = "to-${u.name}"; };
+      listener = { type = "tcp"; };
+    }) users;
+    chains = map (u: {
+      name = "to-${u.name}";
+      hops = [
+        {
+          name = "hop-0";
+          nodes = [
+            {
+              name = "user-sock";
+              addr = "${socketDirectory}/${toString u.uid}/sock";
+              connector = { type = "unix"; };
+              dialer = { type = "unix"; };
+            }
+          ];
+        }
+      ];
+    }) users;
+  };
+
+  # =====================================================================
+  # per-user gost：监听自己的 unix socket，解析 socks5，喂回本用户 mihomo 重入点
+  # =====================================================================
+  perUserGostConfig = u: yaml.generate "gost-${u.name}.yaml" {
+    services = [
+      {
+        name = "user-${toString u.uid}-in";
+        addr = "${socketDirectory}/${toString u.uid}/sock";
+        handler = { type = "socks5"; chain = "to-mihomo"; };
+        listener = { type = "unix"; };
+      }
+    ];
+    chains = [
+      {
+        name = "to-mihomo";
+        hops = [
+          {
+            name = "hop-0";
+            nodes = [
+              {
+                name = "mihomo-socks-in";
+                addr = "127.0.0.1:${toString u.socksInPort}";
+                connector = { type = "socks5"; };
+                dialer = { type = "tcp"; };
+              }
+            ];
+          }
+        ];
+      }
+    ];
+  };
+
+  # =====================================================================
+  # per-user mihomo：mixed 重入端口 + 只放行自己的域名（用于验证域名下发）
+  # =====================================================================
+  perUserMihomoConfig = u: yaml.generate "mihomo-${u.name}.yaml" {
+    mode = "rule";
+    log-level = "debug";
+    ipv6 = false;
+    dns = {
+      enable = true;
+      hosts = { "echo-${u.name}.example.test" = "192.168.50.2"; };
+      nameserver = [ "192.168.50.2" ];
+    };
+    mixed-port = u.socksInPort;
+    allow-lan = false;
+    rules = [
+      "DOMAIN,echo-${u.name}.example.test,DIRECT"
+      "MATCH,REJECT"
+    ];
+  };
+
+  # =====================================================================
+  # 手写路由：声明式描述，交给 systemd oneshot 建立
+  # =====================================================================
+  routingRules =
+    [ "pref 50 uidrange ${svcUidRange} lookup main"
+      "pref 100 ipproto udp dport 53 lookup ${toString dnsTable}"
+      "pref 100 ipproto tcp dport 53 lookup ${toString dnsTable}"
+    ]
+    ++ (lib.imap0 (i: u:
+      "pref ${toString (1000 + i)} uidrange ${toString u.uid}-${toString u.uid} lookup ${toString u.table}"
+    ) users)
+    ++ [ "pref 32765 from all lookup ${toString othersTable}" ];
+
+  routingRoutes =
+    [ "default via 198.19.0.2 dev tun-dns table ${toString dnsTable}" ]
+    ++ map (u: "default via ${u.peer} dev ${u.tun} table ${toString u.table}") users
+    ++ [ "default via 198.19.3.2 dev tun-others table ${toString othersTable}" ];
 in
 {
-  # nsncd 默认代理所有 NSS 查询（含 hosts/DNS），导致 DNS 由 nscd 用户代发、uid 丢失，
-  # uidrange 分流抓不到。用 nsncd 原生的 NSNCD_IGNORE_HOSTS=true 只关掉 hosts 代理，
-  # 保留 passwd/group/systemd 动态数据源，应用自己发 DNS（uid 正确）。
-  systemd.services.nscd.serviceConfig.Environment = [
-    "NSNCD_HANDOFF_TIMEOUT=10"
-    "NSNCD_IGNORE_HOSTS=true"
-  ];
+  # DNS 按 53 全局劫持（tun-dns），不依赖 uid，保留默认 nsncd。
 
   boot.kernelModules = [ "tun" ];
 
@@ -117,80 +218,115 @@ in
     { address = "192.168.50.1"; prefixLength = 24; }
   ];
 
-  # 关键：让 alice/bob 的 DNS 查询目标指向一个"非本机"地址，从而走默认路由进 tun、
-  # 被 dns-hijack 劫持（若指向 127.0.0.53 会走 local 表，永远不会进 tun）。
   networking.nameservers = [ "1.1.1.1" ];
 
   environment.systemPackages = [ pkgs.python3 pkgs.iproute2 pkgs.tcpdump ];
 
-  users.users.alice = {
-    isNormalUser = true;
-    uid = 1001;
-    description = "test user whose traffic is routed by UID";
-  };
-  users.users.bob = {
-    isNormalUser = true;
-    uid = 1002;
-    description = "second test user";
-  };
-  users.users.alicesvc = {
-    isSystemUser = true;
-    uid = 1003;
-    group = "alicesvc";
-    shell = pkgs.bash;
-    description = "dedicated uid for alice's per-user mihomo";
-  };
-  users.users.bobsvc = {
-    isSystemUser = true;
-    uid = 1004;
-    group = "bobsvc";
-    shell = pkgs.bash;
-    description = "dedicated uid for bob's per-user mihomo";
-  };
-  users.groups.alicesvc = { };
-  users.groups.bobsvc = { };
+  # 应用用户 + per-user 服务用户 + controllerGroup
+  users.users = lib.listToAttrs (lib.flatten (map (u: [
+    (lib.nameValuePair u.name {
+      isNormalUser = true;
+      uid = u.uid;
+      description = "test user ${u.name}";
+    })
+    (lib.nameValuePair u.svcName {
+      isSystemUser = true;
+      uid = u.svcUid;
+      group = u.svcName;
+      shell = pkgs.bash;
+      description = "dedicated uid for ${u.name}'s per-user mihomo";
+    })
+  ]) users));
 
-  systemd.services.mihomo-system = {
-    wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" ];
-    serviceConfig = {
-      StateDirectory = "mihomo-system";
-      ExecStart = "${pkgs.mihomo}/bin/mihomo -d /var/lib/mihomo-system -f /var/lib/mihomo-system/config.yaml";
-      Restart = "on-failure";
-      AmbientCapabilities = [ "CAP_NET_ADMIN" "CAP_NET_RAW" "CAP_NET_BIND_SERVICE" ];
-    };
-    preStart = ''
-      install -m 644 ${mihomo-system-config} /var/lib/mihomo-system/config.yaml
-    '';
-  };
+  users.groups = (lib.listToAttrs (map (u: lib.nameValuePair u.svcName { }) users))
+    // { ${controllerGroup} = { }; };
 
-  systemd.services.mihomo-user-alice = {
-    wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" ];
-    serviceConfig = {
-      User = "alicesvc";
-      Group = "alicesvc";
-      StateDirectory = "mihomo-user-alice";
-      ExecStart = "${pkgs.mihomo}/bin/mihomo -d /var/lib/mihomo-user-alice -f /var/lib/mihomo-user-alice/config.yaml";
-      Restart = "on-failure";
-    };
-    preStart = ''
-      install -m 644 -o alicesvc -g alicesvc ${mihomo-alice-config} /var/lib/mihomo-user-alice/config.yaml
-    '';
-  };
+  # unix socket 目录：owner 是用户、group 是 controllerGroup（system gost 靠 group 访问）
+  systemd.tmpfiles.rules =
+    [ "d ${socketDirectory} 0755 root ${controllerGroup} -" ]
+    ++ map (u: "d ${socketDirectory}/${toString u.uid} 0770 ${u.name} ${controllerGroup} -") users;
 
-  systemd.services.mihomo-user-bob = {
-    wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" ];
-    serviceConfig = {
-      User = "bobsvc";
-      Group = "bobsvc";
-      StateDirectory = "mihomo-user-bob";
-      ExecStart = "${pkgs.mihomo}/bin/mihomo -d /var/lib/mihomo-user-bob -f /var/lib/mihomo-user-bob/config.yaml";
-      Restart = "on-failure";
-    };
-    preStart = ''
-      install -m 644 -o bobsvc -g bobsvc ${mihomo-bob-config} /var/lib/mihomo-user-bob/config.yaml
-    '';
-  };
+  systemd.services = lib.mkMerge [
+    {
+      mihomo-system = {
+        wantedBy = [ "multi-user.target" ];
+        after = [ "network.target" ];
+        serviceConfig = {
+          StateDirectory = "mihomo-system";
+          ExecStart = "${pkgs.mihomo}/bin/mihomo -d /var/lib/mihomo-system -f /var/lib/mihomo-system/config.yaml";
+          Restart = "on-failure";
+          AmbientCapabilities = [ "CAP_NET_ADMIN" "CAP_NET_RAW" "CAP_NET_BIND_SERVICE" ];
+        };
+        preStart = ''
+          install -m 644 ${mihomoSystemConfig} /var/lib/mihomo-system/config.yaml
+        '';
+      };
+
+      # system gost：TCP -> unix socket
+      user-tun-gost = {
+        wantedBy = [ "multi-user.target" ];
+        after = [ "mihomo-system.service" ];
+        serviceConfig = {
+          ExecStart = "${pkgs.gost}/bin/gost -C ${gostSystemConfig}";
+          Restart = "on-failure";
+          DynamicUser = true;
+          SupplementaryGroups = [ controllerGroup ];
+        };
+      };
+
+      # 声明式路由：Nix 列表 -> systemd oneshot -> ip 命令
+      user-tun-route = {
+        wantedBy = [ "multi-user.target" ];
+        requires = [ "mihomo-system.service" ];
+        after = [ "mihomo-system.service" ];
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+        };
+        script = ''
+          for t in tun-dns ${lib.concatStringsSep " " (map (u: u.tun) users)} tun-others; do
+            until ${pkgs.iproute2}/bin/ip link show $t >/dev/null 2>&1; do sleep 0.2; done
+          done
+          ${lib.concatMapStringsSep "\n" (r: "${pkgs.iproute2}/bin/ip rule add ${r}") routingRules}
+          ${lib.concatMapStringsSep "\n" (r: "${pkgs.iproute2}/bin/ip route add ${r}") routingRoutes}
+        '';
+        preStop = ''
+          ${lib.concatMapStringsSep "\n" (r: "${pkgs.iproute2}/bin/ip route del ${r}") (lib.reverseList routingRoutes)}
+          ${lib.concatMapStringsSep "\n" (r: "${pkgs.iproute2}/bin/ip rule del ${r}") (lib.reverseList routingRules)}
+        '';
+      };
+    }
+
+    # per-user gost（每个用户一套）
+    (lib.listToAttrs (map (u:
+      lib.nameValuePair "gost-user-${u.name}" {
+        wantedBy = [ "multi-user.target" ];
+        after = [ "network.target" ];
+        serviceConfig = {
+          User = u.name;
+          UMask = "0000";
+          ExecStart = "${pkgs.gost}/bin/gost -C ${perUserGostConfig u}";
+          Restart = "on-failure";
+        };
+      }
+    ) users))
+
+    # per-user mihomo（每个用户一套）
+    (lib.listToAttrs (map (u:
+      lib.nameValuePair "mihomo-user-${u.name}" {
+        wantedBy = [ "multi-user.target" ];
+        after = [ "network.target" ];
+        serviceConfig = {
+          User = u.svcName;
+          Group = u.svcName;
+          StateDirectory = "mihomo-user-${u.name}";
+          ExecStart = "${pkgs.mihomo}/bin/mihomo -d /var/lib/mihomo-user-${u.name} -f /var/lib/mihomo-user-${u.name}/config.yaml";
+          Restart = "on-failure";
+        };
+        preStart = ''
+          install -m 644 -o ${u.svcName} -g ${u.svcName} ${perUserMihomoConfig u} /var/lib/mihomo-user-${u.name}/config.yaml
+        '';
+      }
+    ) users))
+  ];
 }
