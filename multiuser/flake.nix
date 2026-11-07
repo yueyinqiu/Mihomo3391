@@ -23,12 +23,12 @@
           router.wait_for_unit("multi-user.target")
           target.wait_for_unit("multi-user.target")
           target.wait_for_unit("echo-server.service")
-          router.wait_for_unit("mihomo-system.service")
-          router.wait_for_unit("mihomo-user-alice.service")
-          router.wait_for_unit("mihomo-user-bob.service")
+          router.wait_for_unit("user-tun-mihomo.service")
+          router.wait_for_unit("user-tun-mihomo-alice.service")
+          router.wait_for_unit("user-tun-mihomo-bob.service")
           router.wait_for_unit("user-tun-gost.service")
-          router.wait_for_unit("gost-user-alice.service")
-          router.wait_for_unit("gost-user-bob.service")
+          router.wait_for_unit("user-tun-gost-alice.service")
+          router.wait_for_unit("user-tun-gost-bob.service")
           router.wait_until_succeeds("ip link show tun-dns >/dev/null 2>&1", timeout=60)
           router.wait_until_succeeds("ip link show tun-alice >/dev/null 2>&1", timeout=60)
           router.wait_until_succeeds("ip link show tun-bob >/dev/null 2>&1", timeout=60)
@@ -40,8 +40,8 @@
           print(router.succeed("ip -4 route show table all"))
           print("=== [diag] ip addr (router) ===")
           print(router.succeed("ip addr"))
-          print("=== [diag] mihomo-system journal ===")
-          print(router.succeed("journalctl -u mihomo-system.service -n 100 --no-pager || true"))
+          print("=== [diag] user-tun-mihomo journal ===")
+          print(router.succeed("journalctl -u user-tun-mihomo.service -n 100 --no-pager || true"))
 
           # 路由完全手写（所有 tun 都是 auto-route: false）：
           #   DNS 按 dport 53 全局劫持进 tun-dns（不看 uid，nsncd 代理也无所谓）
@@ -76,7 +76,7 @@
             "    if a==1: s.recv(6)\n"
             "    elif a==3: s.recv(1+s.recv(1)[0]+2)\n"
             "    elif a==4: s.recv(18)\n"
-            "s=socket.create_connection(('127.0.0.1',43007),timeout=10)\n"
+            "s=socket.create_connection(('127.0.0.1',43008),timeout=10)\n"
             "c(s,'echo-alice.example.test',9999)\n"
             "s.sendall(b'domain-hello')\n"
             "x=s.recv(4096)\n"
@@ -92,7 +92,7 @@
           print("=== [diag] hand-written ip rule (from user-tun-route) ===")
           print(router.succeed("ip rule show"))
           print("=== [diag] hand-written ip route (tables) ===")
-          print(router.succeed("ip -4 route show table 2000; ip -4 route show table 2100; ip -4 route show table 2101; ip -4 route show table 2200"))
+          print(router.succeed("ip -4 route show table 2000; ip -4 route show table 2101; ip -4 route show table 2102; ip -4 route show table 2200"))
 
           print("=== [diag] /etc/resolv.conf ===")
           print(router.succeed("cat /etc/resolv.conf"))
@@ -114,11 +114,11 @@
           router.fail("runuser -u bob -- python3 /tmp/echodns.py echo-alice.example.test 9999")
 
           print("=== per-user mihomo logs (域名应出现在 dial 行) ===")
-          print(router.succeed("journalctl -u mihomo-user-alice.service -n 60 --no-pager || true"))
-          print(router.succeed("journalctl -u mihomo-user-bob.service -n 60 --no-pager || true"))
+          print(router.succeed("journalctl -u user-tun-mihomo-alice.service -n 60 --no-pager || true"))
+          print(router.succeed("journalctl -u user-tun-mihomo-bob.service -n 60 --no-pager || true"))
 
           # proxy 路径不应做 UID 反查，因此系统 mihomo 日志不应出现 could not get uid
-          syslog = router.succeed("journalctl -u mihomo-system.service --no-pager")
+          syslog = router.succeed("journalctl -u user-tun-mihomo.service --no-pager")
           assert "could not get uid" not in syslog, "found 'could not get uid' in system mihomo log"
         '';
       };
