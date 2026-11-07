@@ -23,7 +23,7 @@ let
     lib.mapAttrsToList (name: u: let
       uid = u.uid;
       seq = uid + cfg.seqBase;
-      netAddr = baseInt + (seq + 1) * cfg.addrStep;   # 每用户一个 /30，从 base+addrStep 起无限加
+      netAddr = baseInt + (seq + 1) * 4;   # 每用户一个 /30（4 地址）
     in {
       name = name;
       uid = uid;
@@ -64,7 +64,7 @@ let
           name = "tun-dns";
           type = "tun";
           device = "tun-dns";
-          stack = "gvisor";
+          stack = "mips";
           auto-route = false;
           dns-hijack = [ "any:53" ];
           inet4-address = [ dnsTunInet4 ];
@@ -74,7 +74,7 @@ let
         name = u.tun;
         type = "tun";
         device = u.tun;
-        stack = "gvisor";
+        stack = "mips";
         auto-route = false;
         inet4-address = [ u.inet4 ];
         proxy = "user-${toString u.uid}";
@@ -84,7 +84,7 @@ let
           name = "tun-others";
           type = "tun";
           device = "tun-others";
-          stack = "gvisor";
+          stack = "mips";
           auto-route = false;
           inet4-address = [ othersTunInet4 ];
           proxy = "others";
@@ -189,7 +189,6 @@ in
     tableBase = mkOption { type = types.int; default = 2100 - 1000; };
     prefBase = mkOption { type = types.int; default = 1000 - 1000; };
     # 地址：netAddr = tunAddressBase + (seq+1) * addrStep（每用户一个 /30，无限往上加）
-    addrStep = mkOption { type = types.int; default = 4; };
     seqBase = mkOption { type = types.int; default = 0 - 1001; };
     # 隧道地址段起始（完整 IPv4，跨设备可配，避免与设备所在网络冲突）
     tunAddressBase = mkOption { type = types.str; default = "198.19.0.0"; };
