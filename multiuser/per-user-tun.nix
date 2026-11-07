@@ -263,17 +263,16 @@ in
             RemainAfterExit = true;
             DynamicUser = true;
             AmbientCapabilities = [ "CAP_NET_ADMIN" ];
+            Restart = "on-failure";
+            RestartSec = 3;
           };
           script = ''
-            for t in tun-dns ${lib.concatStringsSep " " (map (u: u.tun) users)} tun-others; do
-              until ${pkgs.iproute2}/bin/ip link show $t >/dev/null 2>&1; do sleep 0.2; done
-            done
-            ${lib.concatMapStringsSep "\n" (r: "${pkgs.iproute2}/bin/ip rule add ${r}") routingRules}
-            ${lib.concatMapStringsSep "\n" (r: "${pkgs.iproute2}/bin/ip route add ${r}") routingRoutes}
+            ${lib.concatMapStringsSep "\n" (r: "${pkgs.iproute2}/bin/ip rule del ${r} 2>/dev/null || true\n            ${pkgs.iproute2}/bin/ip rule add ${r}") routingRules}
+            ${lib.concatMapStringsSep "\n" (r: "${pkgs.iproute2}/bin/ip route replace ${r}") routingRoutes}
           '';
           preStop = ''
-            ${lib.concatMapStringsSep "\n" (r: "${pkgs.iproute2}/bin/ip route del ${r}") (lib.reverseList routingRoutes)}
-            ${lib.concatMapStringsSep "\n" (r: "${pkgs.iproute2}/bin/ip rule del ${r}") (lib.reverseList routingRules)}
+            ${lib.concatMapStringsSep "\n" (r: "${pkgs.iproute2}/bin/ip route del ${r} || true") (lib.reverseList routingRoutes)}
+            ${lib.concatMapStringsSep "\n" (r: "${pkgs.iproute2}/bin/ip rule del ${r} || true") (lib.reverseList routingRules)}
           '';
         };
     };
