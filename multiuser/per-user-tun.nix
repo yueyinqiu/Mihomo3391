@@ -192,7 +192,7 @@ in
     };
     # 隧道地址段起始（完整 IPv4，跨设备可配，避免与设备所在网络冲突）
     tunAddressBase = mkOption { type = types.str; default = "198.19.0.0"; };
-    # per-user tun 名字前缀（拼 uid），总长需 < 15（IFNAMSIZ）
+    # tun 设备名前缀（供 system 的 dns/others 与 user 的 seq 共用），拼出总长需 < 15（IFNAMSIZ）
     tunNamePrefix = mkOption { type = types.str; default = "ut-"; };
 
     # tun 路由表号
