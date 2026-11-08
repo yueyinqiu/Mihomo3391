@@ -4,14 +4,11 @@ let
   yaml = pkgs.formats.yaml { };
 
   # 使用方自己按约定算（和 system 侧一致，不依赖 module 暴露任何东西）：
-  #   socksInPort = uid + 15884（= 16884 - 1000）
-  #   netns = ut-{name}，vethPeer = ut-{name}-ns（mihomo 在 netns 里绑 veth 出站）
+  #   netnsPath = /run/user-tun/netns/{name}（mihomo 进程要进的 netns 挂载点）
+  #   mixed-port = 7890（每 ns 的 loopback 私有，统一端口）
   derivedUsers = lib.mapAttrsToList (name: u: {
     name = name;
-    uid = u.uid;
-    socksInPort = u.uid + 15884;
-    netns = "ut-${name}";
-    vethPeer = "ut-${name}-ns";
+    netnsPath = "/run/user-tun/netns/${name}";
   }) (lib.filterAttrs (_: u: u.isNormalUser == true) config.users.users);
 
   # ---------------------------------------------------------------------
@@ -21,8 +18,7 @@ let
     mode = "rule";
     log-level = "info";
     ipv6 = false;
-    interface-name = u.vethPeer;   # 出站绑 veth（netns 内唯一接口，避免回环）
-    mixed-port = u.socksInPort;
+    mixed-port = 7890;   # 每 ns 私有统一端口；出站走 netns 默认路由（唯一 veth），无需 interface-name
     allow-lan = false;
     dns = {
       enable = true;
@@ -71,7 +67,7 @@ in
         serviceConfig = {
           User = u.name;
           StateDirectory = "user-tun-mihomo-${u.name}";
-          NetworkNamespacePath = "/run/netns/${u.netns}";
+          NetworkNamespacePath = u.netnsPath;
           ExecStart = "${lib.getExe pkgs.mihomo} -d /var/lib/user-tun-mihomo-${u.name} -f ${perUserMihomoConfig u}";
           Restart = "on-failure";
         };

@@ -27,12 +27,13 @@ let
       name = name;
       uid = uid;
       seq = seq;
-      socksInPort = seq + cfg.socksInPortBase;
-      netns = "${cfg.netnsPrefix}${name}";
-      veth = "${cfg.vethPrefix}${name}";
-      vethPeer = "${cfg.vethPrefix}${name}-ns";
-      vethHost = intToIp (vethBaseInt + seq * 4 + 1);
-      vethPeerAddr = intToIp (vethBaseInt + seq * 4 + 2);
+      netnsName = "${cfg.netnsPrefix}${toString seq}";
+      netnsPath = "/run/user-tun/netns/${name}";
+      veth = "${cfg.vethPrefix}${toString seq}";
+      vethPeer = "${cfg.vethPrefix}${toString seq}p";
+      # veth 用 /31（点对点 2 地址，不浪费网络/广播）
+      vethHost = intToIp (vethBaseInt + seq * 2);
+      vethPeerAddr = intToIp (vethBaseInt + seq * 2 + 1);
       tun = "${cfg.tunNamePrefix}${toString seq}";
       table = seq + cfg.tableBase;
       pref = seq + cfg.prefBase;
@@ -68,8 +69,8 @@ let
     };
     network_namespaces = map (u: {
       type = "default";
-      tag = u.netns;
-      path = "/run/netns/${u.netns}";
+      tag = u.netnsName;
+      path = u.netnsPath;
     }) users;
     inbounds =
       [
@@ -102,9 +103,9 @@ let
         type = "socks";
         tag = "user-${u.name}";
         server = "127.0.0.1";
-        server_port = u.socksInPort;
+        server_port = 7890;
         version = "5";
-        netns = u.netns;
+        netns = u.netnsName;
       }) users
       # others：非 normal user 的兜底出口；当前 block（安全默认），真实环境由 consumer 定义同理的 others mihomo/netns
       ++ [
@@ -130,7 +131,7 @@ let
       "pref 100 ipproto tcp dport 53 lookup ${toString cfg.dnsTable}"
     ]
     # 回程：目标为各 veth 子网（/30）的包走 main 直连回 netns，不落入 others 兜底
-    ++ map (u: "pref 40 to ${intToIp (vethBaseInt + u.seq * 4)}/30 lookup main") users
+    ++ map (u: "pref 40 to ${intToIp (vethBaseInt + u.seq * 2)}/31 lookup main") users
     # 回环避免：从各 veth 进来的流量直接走 main（不进 dport53/uidrange，避免回 tun）
     ++ map (u: "pref 50 iif ${u.veth} lookup main") users
     ++ map (u:
@@ -145,10 +146,8 @@ let
 in
 {
   options.per-user-tun = {
-    enable = mkEnableOption "per-user TUN 分流（系统级 mihomo + 两级 gost 桥接 + 手写路由）";
+    enable = mkEnableOption "per-user TUN 分流（系统级 mihomo + 多 netns + 手写路由）";
 
-    # per-user mihomo 的 mixed-port 端口基准（最终值 = seq + base，consumer 按同一约定算）
-    socksInPortBase = mkOption { type = types.int; default = 16884 - 1000; };
     tableBase = mkOption { type = types.int; default = 2100 - 1000; };
     prefBase = mkOption { type = types.int; default = 1000 - 1000; };
     # normal user -> 序号（默认 = uid；地址那边会自行 +2 让出其前两组）
@@ -162,10 +161,10 @@ in
     vethAddressBase = mkOption { type = types.str; default = "100.64.0.0"; };
     # tun 设备名前缀（供 system 的 dns/others 与 user 的 seq 共用），拼出总长需 < 15（IFNAMSIZ）
     tunNamePrefix = mkOption { type = types.str; default = "ut-"; };
-    # netns 名字前缀（/run/netns/{prefix}{name}）
+    # netns 名（ip netns add 的标识）前缀，避免和用户自己建的 netns 撞
     netnsPrefix = mkOption { type = types.str; default = "ut-"; };
-    # veth 接口名前缀（host 端 {prefix}{name}，netns 端 {prefix}{name}-ns；与 netns 同名但不同命名空间，不冲突）
-    vethPrefix = mkOption { type = types.str; default = "ut-"; };
+    # veth 接口名前缀（host 端 {prefix}{seq}，netns 端 {prefix}{seq}p；与 tun 同为接口，用 utv- 区分）
+    vethPrefix = mkOption { type = types.str; default = "utv-"; };
 
     # tun 路由表号
     dnsTable = mkOption { type = types.int; default = 2000; };
@@ -202,16 +201,19 @@ in
             RemainAfterExit = true;
           };
           script = ''
+            mkdir -p /run/user-tun/netns
             ${lib.concatMapStringsSep "\n" (u: ''
-              ${pkgs.iproute2}/bin/ip netns add ${u.netns} 2>/dev/null || true
+              ${pkgs.iproute2}/bin/ip netns add ${u.netnsName} 2>/dev/null || true
+              touch ${u.netnsPath}
+              ${pkgs.util-linux}/bin/mount --bind /run/netns/${u.netnsName} ${u.netnsPath}
               ${pkgs.iproute2}/bin/ip link add ${u.veth} type veth peer name ${u.vethPeer} 2>/dev/null || true
-              ${pkgs.iproute2}/bin/ip addr add ${u.vethHost}/30 dev ${u.veth} 2>/dev/null || true
+              ${pkgs.iproute2}/bin/ip addr add ${u.vethHost}/31 dev ${u.veth} 2>/dev/null || true
               ${pkgs.iproute2}/bin/ip link set ${u.veth} up
-              ${pkgs.iproute2}/bin/ip link set ${u.vethPeer} netns ${u.netns}
-              ${pkgs.iproute2}/bin/ip netns exec ${u.netns} ${pkgs.iproute2}/bin/ip addr add ${u.vethPeerAddr}/30 dev ${u.vethPeer}
-              ${pkgs.iproute2}/bin/ip netns exec ${u.netns} ${pkgs.iproute2}/bin/ip link set ${u.vethPeer} up
-              ${pkgs.iproute2}/bin/ip netns exec ${u.netns} ${pkgs.iproute2}/bin/ip link set lo up
-              ${pkgs.iproute2}/bin/ip netns exec ${u.netns} ${pkgs.iproute2}/bin/ip route add default via ${u.vethHost}
+              ${pkgs.iproute2}/bin/ip link set ${u.vethPeer} netns ${u.netnsName}
+              ${pkgs.iproute2}/bin/ip netns exec ${u.netnsName} ${pkgs.iproute2}/bin/ip addr add ${u.vethPeerAddr}/31 dev ${u.vethPeer}
+              ${pkgs.iproute2}/bin/ip netns exec ${u.netnsName} ${pkgs.iproute2}/bin/ip link set ${u.vethPeer} up
+              ${pkgs.iproute2}/bin/ip netns exec ${u.netnsName} ${pkgs.iproute2}/bin/ip link set lo up
+              ${pkgs.iproute2}/bin/ip netns exec ${u.netnsName} ${pkgs.iproute2}/bin/ip route add default via ${u.vethHost}
             '') users}
           '';
         };
