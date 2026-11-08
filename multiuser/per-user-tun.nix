@@ -41,6 +41,11 @@ let
       peer = intToIp (baseInt + (seq + 2) * 4 + 2);
     }) cfg.userSeqs;
 
+  # 控制面：clash api 的 secret 文件目录 + 组（consumer 把需要控的用户加进这个组）
+  controllerGroup = "user-tun-controller";
+  controllerDirectory = "/run/user-tun/controller";
+  controllerSecret = "${controllerDirectory}/secret";
+
   # tun 设备名：统一 tunNamePrefix（默认 "ut-"），system 用词后缀、user 用数字后缀（seq 必为数字，天然不冲突）
   dnsTun = "${cfg.tunNamePrefix}dns";
   othersTun = "${cfg.tunNamePrefix}others";
@@ -57,6 +62,12 @@ let
   # =====================================================================
   singBoxConfig = pkgs.writeText "user-tun-sing-box.json" (builtins.toJSON {
     log = { level = "info"; };
+    experimental = {
+      clash_api = {
+        external_controller = "127.0.0.1:${toString cfg.controllerPort}";
+        secret = "@CLASH_SECRET@";
+      };
+    };
     dns = {
       servers = [
         { type = "local"; tag = "local"; }
@@ -107,11 +118,13 @@ let
         version = "5";
         netns = u.netnsName;
       }) users
-      # others：非 normal user 的兜底出口；当前 block（安全默认），真实环境由 consumer 定义同理的 others mihomo/netns
       ++ [
+        { type = "block"; tag = "block"; }
         {
-          type = "block";
+          type = "selector";
           tag = "others";
+          outbounds = map (u: "user-${u.name}") users ++ [ "block" ];
+          default = "block";
         }
       ];
     route = {
@@ -130,7 +143,7 @@ let
     [ "pref 100 ipproto udp dport 53 lookup ${toString cfg.dnsTable}"
       "pref 100 ipproto tcp dport 53 lookup ${toString cfg.dnsTable}"
     ]
-    # 回程：目标为各 veth 子网（/30）的包走 main 直连回 netns，不落入 others 兜底
+    # 回程：目标为各 veth 子网（/31）的包走 main 直连回 netns，不落入 others 兜底
     ++ map (u: "pref 40 to ${intToIp (vethBaseInt + u.seq * 2)}/31 lookup main") users
     # 回环避免：从各 veth 进来的流量直接走 main（不进 dport53/uidrange，避免回 tun）
     ++ map (u: "pref 50 iif ${u.veth} lookup main") users
@@ -175,9 +188,19 @@ in
 
     # system sing-box 的 fake-ip 地址段；域名经 fake-ip 反查后原样下发（TCP/UDP 都传域名，单 ip 不分）
     fakeIpRange = mkOption { type = types.str; default = "198.18.0.1/16"; };
+
+    # clash api 监听的 host loopback 端口（sing-box clash api 只支持 TCP，secret 运行时随机生成）
+    controllerPort = mkOption { type = types.int; default = 9090; };
   };
 
   config = mkIf cfg.enable {
+    users.groups.${controllerGroup} = { };
+
+    # clash api 的 secret 文件目录：controllerGroup 可读（secret 文件由 sing-box 的 ExecStartPre 生成）
+    systemd.tmpfiles.rules = [
+      "d ${controllerDirectory} 0750 root ${controllerGroup} -"
+    ];
+
     # netns 方案：mihomo 流量从 veth 进 host 需转发（veth -> eth1），开 ip_forward
     boot.kernel.sysctl = {
       "net.ipv4.ip_forward" = 1;
@@ -220,16 +243,33 @@ in
 
         user-tun-singbox = {
           wantedBy = [ "multi-user.target" ];
-          after = [ "network.target" "user-tun-netns.service" ];
+          after = [ "network.target" "user-tun-netns.service" "systemd-tmpfiles-setup.service" ];
           serviceConfig = {
             DynamicUser = true;
-            ExecStart = "${pkgs.sing-box}/bin/sing-box run -c ${singBoxConfig}";
+            # 运行时随机生成 clash secret：写组可读文件 + 注入 @CLASH_SECRET@ 占位符到 /run 的临时 config（不落 /nix/store）
+            ExecStartPre = [ "!${pkgs.writeShellScript "user-tun-clash-secret" ''
+              set -eu
+              secret="$(${pkgs.openssl}/bin/openssl rand -hex 32)"
+              ${pkgs.coreutils}/bin/mkdir -p ${controllerDirectory}
+              printf '%s\n' "$secret" > ${controllerSecret}
+              ${pkgs.coreutils}/bin/chown root:${controllerGroup} ${controllerSecret}
+              ${pkgs.coreutils}/bin/chmod 640 ${controllerSecret}
+              ${pkgs.gnused}/bin/sed "s|@CLASH_SECRET@|$secret|g" ${singBoxConfig} > /run/user-tun/sing-box.json
+              ${pkgs.coreutils}/bin/chown root:${controllerGroup} /run/user-tun/sing-box.json
+              ${pkgs.coreutils}/bin/chmod 640 /run/user-tun/sing-box.json
+            ''}" ];
+            ExecStart = "${pkgs.sing-box}/bin/sing-box run -c /run/user-tun/sing-box.json";
             Restart = "on-failure";
             # CAP_NET_ADMIN 建 tun；CAP_SYS_ADMIN 供 setns 进入各 user netns
             AmbientCapabilities = [ "CAP_NET_ADMIN" "CAP_SYS_ADMIN" ];
             # tun 需要访问 /dev/net/tun（host devtmpfs）并在 host 网络命名空间里操作
             PrivateDevices = false;
             PrivateUsers = false;
+            # 读 ExecStartPre 生成 config（640 root:controllerGroup）需要 controllerGroup
+            SupplementaryGroups = [ controllerGroup ];
+            # ExecStartPre 要写 /run/user-tun（secret + 运行时 config），在 protect 下白名单放行
+            ProtectSystem = "strict";
+            ReadWritePaths = [ "/run/user-tun" ];
           };
         };
 
@@ -256,5 +296,18 @@ in
           '';
         };
     };
+
+    # 供 controllerGroup 成员切换 others selector 的小工具（读 secret 文件 -> clash api）
+    environment.systemPackages = [
+      (pkgs.writeShellScriptBin "user-tun-select" ''
+        set -eu
+        name="$1"
+        secret="$(${pkgs.coreutils}/bin/cat ${controllerSecret})"
+        ${pkgs.curl}/bin/curl -sf -X PUT \
+          -H "Authorization: Bearer $secret" \
+          -d "{\"name\":\"$name\"}" \
+          "http://127.0.0.1:${toString cfg.controllerPort}/proxies/others"
+      '')
+    ];
   };
 }

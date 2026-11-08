@@ -24,7 +24,12 @@
           target.wait_for_unit("multi-user.target")
           target.wait_for_unit("echo-server.service")
           router.wait_for_unit("user-tun-netns.service")
-          router.wait_for_unit("user-tun-singbox.service")
+          try:
+            router.wait_for_unit("user-tun-singbox.service", timeout=15)
+          except Exception:
+            print("=== [diag] singbox journal (on fail) ===")
+            print(router.execute("journalctl -u user-tun-singbox.service -n 100 --no-pager || true")[1])
+            raise
           router.wait_for_unit("user-tun-mihomo-alice.service")
           router.wait_for_unit("user-tun-mihomo-bob.service")
           router.wait_until_succeeds("ip link show ut-dns >/dev/null 2>&1", timeout=60)
@@ -106,6 +111,20 @@
           print(router.succeed("runuser -u bob -- python3 /tmp/udpecho.py echo-bob.example.test 9999"))
           print("=== bob -> echo-alice.example.test UDP (expect FAIL) ===")
           router.fail("runuser -u bob -- python3 /tmp/udpecho.py echo-alice.example.test 9999")
+
+          print("=== [control] secret 文件 + user-tun-select 工具 ===")
+          print(router.succeed("ls -l /run/user-tun/controller/secret"))
+          print(router.succeed("test -r /run/user-tun/controller/secret && echo secret_readable"))
+          print(router.succeed("command -v user-tun-select"))
+
+          print("=== [control] others 默认 block：root（非 normal user）访问应失败 ===")
+          router.fail("python3 /tmp/echodns.py echo-alice.example.test 9999")
+
+          print("=== [control] 切 others -> user-alice ===")
+          print(router.succeed("user-tun-select user-alice"))
+
+          print("=== [control] root -> echo-alice (expect TCP_OK，others 借道 alice) ===")
+          print(router.succeed("python3 /tmp/echodns.py echo-alice.example.test 9999"))
 
           print("=== per-user mihomo logs (域名应出现在 dial 行) ===")
           print(router.succeed("journalctl -u user-tun-mihomo-alice.service -n 60 --no-pager || true"))
