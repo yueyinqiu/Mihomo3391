@@ -1,0 +1,1 @@
+nix run nixpkgs#python3 -- allow.py 'nix flake check ./multiuser &> m'
