@@ -30,8 +30,8 @@
           router.wait_for_unit("user-tun-gost-alice.service")
           router.wait_for_unit("user-tun-gost-bob.service")
           router.wait_until_succeeds("ip link show tun-dns >/dev/null 2>&1", timeout=60)
-          router.wait_until_succeeds("ip link show tun-alice >/dev/null 2>&1", timeout=60)
-          router.wait_until_succeeds("ip link show tun-bob >/dev/null 2>&1", timeout=60)
+          router.wait_until_succeeds("ip link show ut-1002 >/dev/null 2>&1", timeout=60)
+          router.wait_until_succeeds("ip link show ut-1003 >/dev/null 2>&1", timeout=60)
           router.wait_until_succeeds("ip link show tun-others >/dev/null 2>&1", timeout=60)
 
           print("=== [diag] ip rule (router) ===")
@@ -76,7 +76,7 @@
             "    if a==1: s.recv(6)\n"
             "    elif a==3: s.recv(1+s.recv(1)[0]+2)\n"
             "    elif a==4: s.recv(18)\n"
-            "s=socket.create_connection(('127.0.0.1',43008),timeout=10)\n"
+            "s=socket.create_connection(('127.0.0.1',43009),timeout=10)\n"
             "c(s,'echo-alice.example.test',9999)\n"
             "s.sendall(b'domain-hello')\n"
             "x=s.recv(4096)\n"
@@ -92,7 +92,7 @@
           print("=== [diag] hand-written ip rule (from user-tun-route) ===")
           print(router.succeed("ip rule show"))
           print("=== [diag] hand-written ip route (tables) ===")
-          print(router.succeed("ip -4 route show table 2000; ip -4 route show table 2101; ip -4 route show table 2102; ip -4 route show table 2200"))
+          print(router.succeed("ip -4 route show table 2000; ip -4 route show table 2102; ip -4 route show table 2103; ip -4 route show table 2200"))
 
           print("=== [diag] /etc/resolv.conf ===")
           print(router.succeed("cat /etc/resolv.conf"))

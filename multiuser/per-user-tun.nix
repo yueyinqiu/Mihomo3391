@@ -20,22 +20,18 @@ let
   baseInt = ipToInt cfg.tunAddressBase;
 
   users =
-    lib.mapAttrsToList (name: u: let
-      uid = u.uid;
-      seq = uid + cfg.seqBase;
-      netAddr = baseInt + (seq + 1) * 4;   # 每用户一个 /30（4 地址）
+    lib.mapAttrsToList (name: seq: let
+      uid = config.users.users.${name}.uid;
     in {
       name = name;
       uid = uid;
-      gostPort = uid + cfg.gostPortBase;
-      socksInPort = uid + cfg.socksInPortBase;
-      tun = "tun-${name}";
-      table = uid + cfg.tableBase;
-      pref = uid + cfg.prefBase;
-      inet4 = "${intToIp (netAddr + 1)}/30";
-      peer = intToIp (netAddr + 2);
-      socketPath = "${cfg.socketDirectory}/${toString uid}/sock";
-    }) (lib.filterAttrs (_: u: u.isNormalUser == true) config.users.users);
+      gostPort = seq + cfg.gostPortBase;
+      tun = "${cfg.tunNamePrefix}${toString seq}";
+      table = seq + cfg.tableBase;
+      pref = seq + cfg.prefBase;
+      inet4 = "${intToIp (baseInt + seq * 4 + 1)}/30";
+      peer = intToIp (baseInt + seq * 4 + 2);
+    }) cfg.userSeqs;
 
   # tun-dns = 第 0 个 /30，tun-others = 段末尾最后一个 /30
   dnsTunInet4 = "${intToIp (baseInt + 1)}/30";
@@ -77,7 +73,7 @@ let
         stack = "mips";
         auto-route = false;
         inet4-address = [ u.inet4 ];
-        proxy = "user-${toString u.uid}";
+        proxy = "user-${u.name}";
       }) users
       ++ [
         {
@@ -91,7 +87,7 @@ let
         }
       ];
     proxies = map (u: {
-      name = "user-${toString u.uid}";
+      name = "user-${u.name}";
       type = "socks5";
       server = "127.0.0.1";
       port = u.gostPort;
@@ -111,7 +107,7 @@ let
   # =====================================================================
   gostSystemConfig = yaml.generate "gost-system.yaml" {
     services = (map (u: {
-      name = "user-${toString u.uid}";
+      name = "user-${u.name}";
       addr = "127.0.0.1:${toString u.gostPort}";
       handler = { type = "tcp"; chain = "to-${u.name}"; };
       listener = { type = "tcp"; };
@@ -132,7 +128,7 @@ let
           nodes = [
             {
               name = "user-sock";
-              addr = "${cfg.socketDirectory}/${toString u.uid}/sock";
+              addr = "${cfg.socketDirectory}/${u.name}/sock";
               connector = { type = "unix"; };
               dialer = { type = "unix"; };
             }
@@ -185,13 +181,17 @@ in
     gostPortBase = mkOption { type = types.int; default = 43007 - 1000; };
     # others（非普通用户）的 gost 端口，固定值，避开用户段
     othersGostPort = mkOption { type = types.int; default = 43000; };
-    socksInPortBase = mkOption { type = types.int; default = 16884 - 1000; };
     tableBase = mkOption { type = types.int; default = 2100 - 1000; };
     prefBase = mkOption { type = types.int; default = 1000 - 1000; };
-    # 地址：netAddr = tunAddressBase + (seq+1) * addrStep（每用户一个 /30，无限往上加）
-    seqBase = mkOption { type = types.int; default = 0 - 1001; };
+    # normal user -> 地址块序号（第 0 个 /30 留给 tun-dns）；默认 uid+1，uid 大或想紧凑时显式传
+    userSeqs = mkOption {
+      type = types.attrsOf types.int;
+      default = lib.mapAttrs (_: u: u.uid + 1) (lib.filterAttrs (_: u: u.isNormalUser == true) config.users.users);
+    };
     # 隧道地址段起始（完整 IPv4，跨设备可配，避免与设备所在网络冲突）
     tunAddressBase = mkOption { type = types.str; default = "198.19.0.0"; };
+    # per-user tun 名字前缀（拼 uid），总长需 < 15（IFNAMSIZ）
+    tunNamePrefix = mkOption { type = types.str; default = "ut-"; };
 
     # tun 路由表号
     dnsTable = mkOption { type = types.int; default = 2000; };
@@ -222,7 +222,7 @@ in
       [ "d ${cfg.socketDirectory} 0755 root ${cfg.controllerGroup} -"
         "d ${cfg.socketDirectory}/others 0770 root ${cfg.controllerGroup} -"
       ]
-      ++ map (u: "d ${cfg.socketDirectory}/${toString u.uid} 0770 ${u.name} ${cfg.controllerGroup} -") users;
+      ++ map (u: "d ${cfg.socketDirectory}/${u.name} 0770 ${u.name} ${cfg.controllerGroup} -") users;
 
     systemd.services = {
         user-tun-mihomo = {

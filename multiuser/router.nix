@@ -9,7 +9,7 @@ let
   derivedUsers = lib.mapAttrsToList (name: u: {
     name = name;
     uid = u.uid;
-    socketPath = "/run/user-tun/${toString u.uid}/sock";
+    socketPath = "/run/user-tun/${u.name}/sock";
     socksInPort = u.uid + 15884;
   }) (lib.filterAttrs (_: u: u.isNormalUser == true) config.users.users);
 
@@ -19,7 +19,7 @@ let
   perUserGostConfig = u: yaml.generate "gost-${u.name}.yaml" {
     services = [
       {
-        name = "user-${toString u.uid}-in";
+        name = "user-${u.name}-in";
         addr = u.socketPath;
         handler = { type = "socks5"; chain = "to-mihomo"; };
         listener = { type = "unix"; };
