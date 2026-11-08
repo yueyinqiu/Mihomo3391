@@ -23,12 +23,10 @@
           router.wait_for_unit("multi-user.target")
           target.wait_for_unit("multi-user.target")
           target.wait_for_unit("echo-server.service")
-          router.wait_for_unit("user-tun-mihomo.service")
+          router.wait_for_unit("user-tun-netns.service")
+          router.wait_for_unit("user-tun-singbox.service")
           router.wait_for_unit("user-tun-mihomo-alice.service")
           router.wait_for_unit("user-tun-mihomo-bob.service")
-          router.wait_for_unit("user-tun-gost.service")
-          router.wait_for_unit("user-tun-gost-alice.service")
-          router.wait_for_unit("user-tun-gost-bob.service")
           router.wait_until_succeeds("ip link show ut-dns >/dev/null 2>&1", timeout=60)
           router.wait_until_succeeds("ip link show ut-1001 >/dev/null 2>&1", timeout=60)
           router.wait_until_succeeds("ip link show ut-1002 >/dev/null 2>&1", timeout=60)
@@ -40,8 +38,8 @@
           print(router.succeed("ip -4 route show table all"))
           print("=== [diag] ip addr (router) ===")
           print(router.succeed("ip addr"))
-          print("=== [diag] user-tun-mihomo journal ===")
-          print(router.succeed("journalctl -u user-tun-mihomo.service -n 100 --no-pager || true"))
+          print("=== [diag] user-tun-singbox journal ===")
+          print(router.succeed("journalctl -u user-tun-singbox.service -n 100 --no-pager || true"))
 
           # 路由完全手写（所有 tun 都是 auto-route: false）：
           #   DNS 按 dport 53 全局劫持进 ut-dns（不看 uid，nsncd 代理也无所谓）
@@ -63,29 +61,19 @@
           )
           router.succeed("cat > /tmp/echodns.py <<'PYEOF'\n" + echodns + "PYEOF\n")
 
-          # 直接测试 gost 链（绕过 mihomo tun）：socks5 -> system gost -> unix -> per-user gost -> mihomo
-          gosttest = (
-            "import socket, struct\n"
-            "def c(s,h,p):\n"
-            "    s.sendall(bytes([5,1,0]))\n"
-            "    assert s.recv(2)==bytes([5,0]), 'greeting'\n"
-            "    hb=h.encode()\n"
-            "    s.sendall(bytes([5,1,0,3,len(hb)])+hb+struct.pack('>H',p))\n"
-            "    r=s.recv(4); assert r[0]==5 and r[1]==0, ('connect', r)\n"
-            "    a=r[3]\n"
-            "    if a==1: s.recv(6)\n"
-            "    elif a==3: s.recv(1+s.recv(1)[0]+2)\n"
-            "    elif a==4: s.recv(18)\n"
-            "s=socket.create_connection(('127.0.0.1',43008),timeout=10)\n"
-            "c(s,'echo-alice.example.test',9999)\n"
-            "s.sendall(b'domain-hello')\n"
-            "x=s.recv(4096)\n"
-            "print('GOST_TEST',x)\n"
-            "assert x==b'domain-hello', x\n"
+          # UDP 版：走 tun + netns 直连 socks5，验证 UDP 能端到端打通
+          udpecho = (
+            "import socket, sys\n"
+            "host, port = sys.argv[1], int(sys.argv[2])\n"
+            "ai = socket.getaddrinfo(host, port, socket.AF_INET, socket.SOCK_DGRAM)\n"
+            "s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)\n"
+            "s.settimeout(10)\n"
+            "s.sendto(b'udp-hello', ai[0][4])\n"
+            "x, _ = s.recvfrom(4096)\n"
+            "assert x == b'udp-hello', x\n"
+            "print('UDP_OK', host)\n"
           )
-          router.succeed("cat > /tmp/gosttest.py <<'PYEOF'\n" + gosttest + "PYEOF\n")
-          print("=== direct gost bridge test (bypass tun) ===")
-          print(router.succeed("python3 /tmp/gosttest.py"))
+          router.succeed("cat > /tmp/udpecho.py <<'PYEOF'\n" + udpecho + "PYEOF\n")
 
           # 路由由 systemd oneshot（user-tun-route）声明式建立，等它跑完即可
           router.wait_for_unit("user-tun-route.service")
@@ -96,9 +84,6 @@
 
           print("=== [diag] /etc/resolv.conf ===")
           print(router.succeed("cat /etc/resolv.conf"))
-          print("=== [diag] tcpdump DNS during alice getaddrinfo ===")
-          router.succeed("tcpdump -ni any udp port 53 > /tmp/dns.log 2>&1 & sleep 1; runuser -u alice -- python3 /tmp/echodns.py echo-alice.example.test 9999 2>&1 || true; sleep 2; pkill tcpdump || true")
-          print(router.succeed("cat /tmp/dns.log || echo '(empty)'"))
 
           # 正向 + 分流正确性。每个 per-user mihomo 只用 DOMAIN 精确规则放行自己的域名，
           # 其余 MATCH,REJECT。因此：
@@ -113,13 +98,21 @@
           print("=== bob -> echo-alice.example.test (expect FAIL) ===")
           router.fail("runuser -u bob -- python3 /tmp/echodns.py echo-alice.example.test 9999")
 
+          print("=== alice -> echo-alice.example.test UDP (expect UDP_OK) ===")
+          print(router.succeed("runuser -u alice -- python3 /tmp/udpecho.py echo-alice.example.test 9999"))
+          print("=== alice -> echo-bob.example.test UDP (expect FAIL) ===")
+          router.fail("runuser -u alice -- python3 /tmp/udpecho.py echo-bob.example.test 9999")
+          print("=== bob -> echo-bob.example.test UDP (expect UDP_OK) ===")
+          print(router.succeed("runuser -u bob -- python3 /tmp/udpecho.py echo-bob.example.test 9999"))
+          print("=== bob -> echo-alice.example.test UDP (expect FAIL) ===")
+          router.fail("runuser -u bob -- python3 /tmp/udpecho.py echo-alice.example.test 9999")
+
           print("=== per-user mihomo logs (域名应出现在 dial 行) ===")
           print(router.succeed("journalctl -u user-tun-mihomo-alice.service -n 60 --no-pager || true"))
           print(router.succeed("journalctl -u user-tun-mihomo-bob.service -n 60 --no-pager || true"))
 
-          # proxy 路径不应做 UID 反查，因此系统 mihomo 日志不应出现 could not get uid
-          syslog = router.succeed("journalctl -u user-tun-mihomo.service --no-pager")
-          assert "could not get uid" not in syslog, "found 'could not get uid' in system mihomo log"
+          print("=== system sing-box log (no find-process) ===")
+          print(router.succeed("journalctl -u user-tun-singbox.service --no-pager || true"))
         '';
       };
     };

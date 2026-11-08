@@ -4,52 +4,24 @@ let
   yaml = pkgs.formats.yaml { };
 
   # 使用方自己按约定算（和 system 侧一致，不依赖 module 暴露任何东西）：
-  #   socketPath = /run/user-tun/{uid}/sock
   #   socksInPort = uid + 15884（= 16884 - 1000）
+  #   netns = ut-{name}，vethPeer = ut-{name}-ns（mihomo 在 netns 里绑 veth 出站）
   derivedUsers = lib.mapAttrsToList (name: u: {
     name = name;
     uid = u.uid;
-    socketPath = "/run/user-tun/${u.name}/sock";
     socksInPort = u.uid + 15884;
+    netns = "ut-${name}";
+    vethPeer = "ut-${name}-ns";
   }) (lib.filterAttrs (_: u: u.isNormalUser == true) config.users.users);
 
   # ---------------------------------------------------------------------
   # per-user 侧（真实里属于 home config，这里作为「使用方」定义）
   # ---------------------------------------------------------------------
-  perUserGostConfig = u: yaml.generate "gost-${u.name}.yaml" {
-    services = [
-      {
-        name = "user-${u.name}-in";
-        addr = u.socketPath;
-        handler = { type = "socks5"; chain = "to-mihomo"; };
-        listener = { type = "unix"; };
-      }
-    ];
-    chains = [
-      {
-        name = "to-mihomo";
-        hops = [
-          {
-            name = "hop-0";
-            nodes = [
-              {
-                name = "mihomo-socks-in";
-                addr = "127.0.0.1:${toString u.socksInPort}";
-                connector = { type = "socks5"; };
-                dialer = { type = "tcp"; };
-              }
-            ];
-          }
-        ];
-      }
-    ];
-  };
-
   perUserMihomoConfig = u: yaml.generate "mihomo-${u.name}.yaml" {
     mode = "rule";
-    log-level = "debug";
+    log-level = "info";
     ipv6 = false;
-    interface-name = "eth1";   # 出站绑接口（回环避免）
+    interface-name = u.vethPeer;   # 出站绑 veth（netns 内唯一接口，避免回环）
     mixed-port = u.socksInPort;
     allow-lan = false;
     dns = {
@@ -76,7 +48,7 @@ in
   # 让 alice/bob 的 DNS 查询走默认路由进 tun、被 dns-hijack 劫持
   networking.nameservers = [ "1.1.1.1" ];
 
-  environment.systemPackages = [ pkgs.python3 pkgs.iproute2 pkgs.tcpdump ];
+  environment.systemPackages = [ pkgs.python3 pkgs.iproute2 ];
 
   # ---- 测试用户 ----
   users.users = {
@@ -91,28 +63,18 @@ in
 
   # ---- per-user 侧（模拟 home config） ----
   systemd.services =
-    (lib.listToAttrs (map (u:
-      lib.nameValuePair "user-tun-gost-${u.name}" {
-        wantedBy = [ "multi-user.target" ];
-        after = [ "network.target" ];
-        serviceConfig = {
-          User = u.name;
-          UMask = "0000";
-          ExecStart = "${lib.getExe pkgs.gost} -C ${perUserGostConfig u}";
-          Restart = "on-failure";
-        };
-      }
-    ) derivedUsers))
-    // (lib.listToAttrs (map (u:
+    lib.listToAttrs (map (u:
       lib.nameValuePair "user-tun-mihomo-${u.name}" {
         wantedBy = [ "multi-user.target" ];
-        after = [ "network.target" ];
+        after = [ "user-tun-netns.service" ];
+        requires = [ "user-tun-netns.service" ];
         serviceConfig = {
           User = u.name;
           StateDirectory = "user-tun-mihomo-${u.name}";
+          NetworkNamespacePath = "/run/netns/${u.netns}";
           ExecStart = "${lib.getExe pkgs.mihomo} -d /var/lib/user-tun-mihomo-${u.name} -f ${perUserMihomoConfig u}";
           Restart = "on-failure";
         };
       }
-    ) derivedUsers));
+    ) derivedUsers);
 }
