@@ -51,8 +51,6 @@ let
       enable = true;
       enhanced-mode = "fake-ip";
       fake-ip-range = cfg.fakeIpRange;
-      hosts = cfg.dnsHosts;
-      nameserver = cfg.dnsNameserver;
     };
     listeners =
       [
@@ -201,10 +199,8 @@ in
     socketDirectory = mkOption { type = types.str; default = "/run/user-tun"; };
     controllerGroup = mkOption { type = types.str; default = "user-tun-controller"; };
 
-    # system mihomo 的 fake-ip DNS
+    # system mihomo 的 fake-ip DNS（域名由 fake-ip 反查后原样下发，真实解析交给下游 per-user mihomo）
     fakeIpRange = mkOption { type = types.str; default = "198.18.0.1/16"; };
-    dnsHosts = mkOption { type = types.attrsOf types.str; default = { }; };
-    dnsNameserver = mkOption { type = types.listOf types.str; default = [ ]; };
   };
 
   config = mkIf cfg.enable {

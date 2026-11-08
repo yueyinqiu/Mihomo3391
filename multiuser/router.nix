@@ -87,11 +87,6 @@ in
   # ---- 配置 per-user-tun module（仅 system 侧） ----
   per-user-tun = {
     enable = true;
-    dnsHosts = {
-      "echo-alice.example.test" = "192.168.50.2";
-      "echo-bob.example.test" = "192.168.50.2";
-    };
-    dnsNameserver = [ "1.1.1.1" ];
   };
 
   # ---- per-user 侧（模拟 home config） ----
