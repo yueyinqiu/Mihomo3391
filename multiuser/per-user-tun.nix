@@ -33,7 +33,11 @@ let
       peer = intToIp (baseInt + (seq + 2) * 4 + 2);
     }) cfg.userSeqs;
 
-  # 布局：tun-dns = 第 0 个 /30，others = 第 1 个 /30，users 从第 2 个 /30 起（无末尾 magic）
+  # tun 设备名：统一 tunNamePrefix（默认 "ut-"），system 用词后缀、user 用数字后缀（seq 必为数字，天然不冲突）
+  dnsTun = "${cfg.tunNamePrefix}dns";
+  othersTun = "${cfg.tunNamePrefix}others";
+
+  # 布局：dns = 第 0 个 /30，others = 第 1 个 /30，users 从第 2 个 /30 起（无末尾 magic）
   dnsTunInet4 = "${intToIp (baseInt + 1)}/30";
   dnsTunPeer = intToIp (baseInt + 2);
   othersTunAddr = baseInt + 4;
@@ -55,9 +59,9 @@ let
     listeners =
       [
         {
-          name = "tun-dns";
+          name = dnsTun;
           type = "tun";
-          device = "tun-dns";
+          device = dnsTun;
           stack = "mips";
           auto-route = false;
           dns-hijack = [ "any:53" ];
@@ -75,9 +79,9 @@ let
       }) users
       ++ [
         {
-          name = "tun-others";
+          name = othersTun;
           type = "tun";
-          device = "tun-others";
+          device = othersTun;
           stack = "mips";
           auto-route = false;
           inet4-address = [ othersTunInet4 ];
@@ -167,9 +171,9 @@ let
     ++ [ "pref 32765 from all lookup ${toString cfg.othersTable}" ];
 
   routingRoutes =
-    [ "default via ${dnsTunPeer} dev tun-dns table ${toString cfg.dnsTable}" ]
+    [ "default via ${dnsTunPeer} dev ${dnsTun} table ${toString cfg.dnsTable}" ]
     ++ map (u: "default via ${u.peer} dev ${u.tun} table ${toString u.table}") users
-    ++ [ "default via ${othersTunPeer} dev tun-others table ${toString cfg.othersTable}" ];
+    ++ [ "default via ${othersTunPeer} dev ${othersTun} table ${toString cfg.othersTable}" ];
 in
 {
   options.per-user-tun = {
@@ -181,7 +185,7 @@ in
     othersGostPort = mkOption { type = types.int; default = 43000; };
     tableBase = mkOption { type = types.int; default = 2100 - 1000; };
     prefBase = mkOption { type = types.int; default = 1000 - 1000; };
-    # normal user -> 序号（默认 = uid；地址那边会自行 +2 让出 tun-dns 与 others 两组）
+    # normal user -> 序号（默认 = uid；地址那边会自行 +2 让出其前两组）
     userSeqs = mkOption {
       type = types.attrsOf types.int;
       default = lib.mapAttrs (_: u: u.uid) (lib.filterAttrs (_: u: u.isNormalUser == true) config.users.users);

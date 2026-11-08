@@ -29,10 +29,10 @@
           router.wait_for_unit("user-tun-gost.service")
           router.wait_for_unit("user-tun-gost-alice.service")
           router.wait_for_unit("user-tun-gost-bob.service")
-          router.wait_until_succeeds("ip link show tun-dns >/dev/null 2>&1", timeout=60)
+          router.wait_until_succeeds("ip link show ut-dns >/dev/null 2>&1", timeout=60)
           router.wait_until_succeeds("ip link show ut-1001 >/dev/null 2>&1", timeout=60)
           router.wait_until_succeeds("ip link show ut-1002 >/dev/null 2>&1", timeout=60)
-          router.wait_until_succeeds("ip link show tun-others >/dev/null 2>&1", timeout=60)
+          router.wait_until_succeeds("ip link show ut-others >/dev/null 2>&1", timeout=60)
 
           print("=== [diag] ip rule (router) ===")
           print(router.succeed("ip rule show"))
@@ -44,9 +44,9 @@
           print(router.succeed("journalctl -u user-tun-mihomo.service -n 100 --no-pager || true"))
 
           # 路由完全手写（所有 tun 都是 auto-route: false）：
-          #   DNS 按 dport 53 全局劫持进 tun-dns（不看 uid，nsncd 代理也无所谓）
+          #   DNS 按 dport 53 全局劫持进 ut-dns（不看 uid，nsncd 代理也无所谓）
           #   连接按 uid 分流进各 tun（proxy 直连，不查进程）
-          #   非普通用户兜底进 tun-others（走 rules -> others）
+          #   非普通用户兜底进 ut-others（走 rules -> others）
           #   per-user 服务 uid 提前排除到 main（避免它们的 DNS/出站被劫持或回环）
 
           echodns = (
