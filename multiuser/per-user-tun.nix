@@ -29,14 +29,14 @@ let
       tun = "${cfg.tunNamePrefix}${toString seq}";
       table = seq + cfg.tableBase;
       pref = seq + cfg.prefBase;
-      inet4 = "${intToIp (baseInt + seq * 4 + 1)}/30";
-      peer = intToIp (baseInt + seq * 4 + 2);
+      inet4 = "${intToIp (baseInt + (seq + 2) * 4 + 1)}/30";
+      peer = intToIp (baseInt + (seq + 2) * 4 + 2);
     }) cfg.userSeqs;
 
-  # tun-dns = 第 0 个 /30，tun-others = 段末尾最后一个 /30
+  # 布局：tun-dns = 第 0 个 /30，others = 第 1 个 /30，users 从第 2 个 /30 起（无末尾 magic）
   dnsTunInet4 = "${intToIp (baseInt + 1)}/30";
   dnsTunPeer = intToIp (baseInt + 2);
-  othersTunAddr = baseInt + 65532;
+  othersTunAddr = baseInt + 4;
   othersTunInet4 = "${intToIp (othersTunAddr + 1)}/30";
   othersTunPeer = intToIp (othersTunAddr + 2);
 
@@ -183,10 +183,10 @@ in
     othersGostPort = mkOption { type = types.int; default = 43000; };
     tableBase = mkOption { type = types.int; default = 2100 - 1000; };
     prefBase = mkOption { type = types.int; default = 1000 - 1000; };
-    # normal user -> 地址块序号（第 0 个 /30 留给 tun-dns）；默认 uid+1，uid 大或想紧凑时显式传
+    # normal user -> 序号（默认 = uid；地址那边会自行 +2 让出 tun-dns 与 others 两组）
     userSeqs = mkOption {
       type = types.attrsOf types.int;
-      default = lib.mapAttrs (_: u: u.uid + 1) (lib.filterAttrs (_: u: u.isNormalUser == true) config.users.users);
+      default = lib.mapAttrs (_: u: u.uid) (lib.filterAttrs (_: u: u.isNormalUser == true) config.users.users);
     };
     # 隧道地址段起始（完整 IPv4，跨设备可配，避免与设备所在网络冲突）
     tunAddressBase = mkOption { type = types.str; default = "198.19.0.0"; };
