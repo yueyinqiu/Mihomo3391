@@ -11,7 +11,7 @@ let
     dns = {
       servers = [
         { type = "local"; tag = "local"; }
-        { type = "fakeip"; tag = "fakeip"; inet4_range = cfg.fakeIpRange; }
+        { type = "fakeip"; tag = "fakeip"; inet4_range = cfg.fakeIpRange; inet6_range = cfg.fakeIp6Range; }
       ];
       rules = [
         { server = "fakeip"; }
@@ -23,7 +23,7 @@ let
         type = "tun";
         tag = "tun";
         stack = "gvisor";
-        address = [ cfg.tunAddress ];
+        address = [ cfg.tunAddress cfg.tunInet6Address ];
         auto_route = true;
       }
     ];
@@ -50,10 +50,12 @@ in
 
     # 用户 mihomo 的 socks/mixed 端口（sing-box 直连它）
     socksPort = mkOption { type = types.int; default = 7890; };
-    # tun 接口地址（单用户一个 tun，auto_route 会把其余流量自动路由进来）
-    tunAddress = mkOption { type = types.str; default = "198.19.0.1/30"; };
-    # fake-ip 地址段
-    fakeIpRange = mkOption { type = types.str; default = "198.18.0.1/16"; };
+    # tun 接口地址（默认值跟 sing-box 官方示例一致；单用户一个 tun，auto_route 自动路由）
+    tunAddress = mkOption { type = types.str; default = "172.18.0.1/30"; };
+    tunInet6Address = mkOption { type = types.str; default = "fdfe:dcba:9876::1/126"; };
+    # fake-ip 地址段（默认值跟 sing-box 官方示例一致）
+    fakeIpRange = mkOption { type = types.str; default = "198.18.0.0/15"; };
+    fakeIp6Range = mkOption { type = types.str; default = "2001:2::/48"; };
   };
 
   config = mkIf cfg.enable {

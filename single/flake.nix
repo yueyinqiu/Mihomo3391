@@ -60,10 +60,24 @@
           )
           router.succeed("cat > /tmp/udpecho.py <<'PYEOF'\n" + udpecho + "PYEOF\n")
 
+          # AAAA（IPv6）解析验证：fakeip 的 inet6_range 应返回 v6 假地址
+          aaaa = (
+            "import socket, sys\n"
+            "host, port = sys.argv[1], int(sys.argv[2])\n"
+            "ai = socket.getaddrinfo(host, port, socket.AF_INET6, socket.SOCK_STREAM)\n"
+            "addr = ai[0][4][0]\n"
+            "assert ':' in addr, addr\n"
+            "print('AAAA_OK', host, addr)\n"
+          )
+          router.succeed("cat > /tmp/aaaa.py <<'PYEOF'\n" + aaaa + "PYEOF\n")
+
           print("=== root -> echo.example.test TCP (expect TCP_OK，auto_route + 域名下发) ===")
           print(router.succeed("python3 /tmp/echodns.py echo.example.test 9999"))
           print("=== root -> echo.example.test UDP (expect UDP_OK) ===")
           print(router.succeed("python3 /tmp/udpecho.py echo.example.test 9999"))
+
+          print("=== root -> echo.example.test AAAA (expect AAAA_OK，fakeip 返回 v6) ===")
+          print(router.succeed("python3 /tmp/aaaa.py echo.example.test 9999"))
 
           print("=== mihomo 日志（域名应出现在 dial 行） ===")
           print(router.succeed("journalctl -u single-mihomo.service -n 60 --no-pager || true"))

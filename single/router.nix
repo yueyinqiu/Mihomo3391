@@ -8,7 +8,7 @@ let
   mihomoConfig = yaml.generate "mihomo-config.yaml" {
     mode = "rule";
     log-level = "info";
-    ipv6 = false;
+    ipv6 = true;
     mixed-port = 7890;      # = single-tun.socksPort，sing-box 直连这个端口
     allow-lan = false;
     interface-name = "eth1"; # 出站绑定 eth1，避免被 sing-box 的 tun 劫持回环
