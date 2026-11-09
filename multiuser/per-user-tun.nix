@@ -200,7 +200,6 @@ in
             ExecStartPre = [ "!${pkgs.writeShellScript "user-tun-clash-secret" ''
               set -eu
               secret="$(${pkgs.openssl}/bin/openssl rand -hex 32)"
-              ${pkgs.coreutils}/bin/mkdir -p ${controllerDirectory}
               printf '%s\n' "$secret" > ${controllerSecret}
               ${pkgs.coreutils}/bin/chown root:${controllerGroup} ${controllerSecret}
               ${pkgs.coreutils}/bin/chmod 640 ${controllerSecret}
