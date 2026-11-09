@@ -23,7 +23,6 @@
           router.wait_for_unit("multi-user.target")
           target.wait_for_unit("multi-user.target")
           target.wait_for_unit("echo-server.service")
-          router.wait_for_unit("user-tun-netns.service")
           try:
             router.wait_for_unit("user-tun-singbox.service", timeout=15)
           except Exception:
@@ -66,7 +65,7 @@
           )
           router.succeed("cat > /tmp/echodns.py <<'PYEOF'\n" + echodns + "PYEOF\n")
 
-          # UDP 版：走 tun + netns 直连 socks5，验证 UDP 能端到端打通
+          # UDP 版：走 tun 直连 per-user mihomo socks5，验证 UDP 能端到端打通
           udpecho = (
             "import socket, sys\n"
             "host, port = sys.argv[1], int(sys.argv[2])\n"
@@ -85,7 +84,7 @@
           print("=== [diag] hand-written ip rule (from user-tun-route) ===")
           print(router.succeed("ip rule show"))
           print("=== [diag] hand-written ip route (tables) ===")
-          print(router.succeed("ip -4 route show table 2000; ip -4 route show table 2101; ip -4 route show table 2102; ip -4 route show table 2200"))
+          print(router.succeed("ip -4 route show table 2000; ip -4 route show table 2001; ip -4 route show table 3003; ip -4 route show table 3004"))
 
           print("=== [diag] /etc/resolv.conf ===")
           print(router.succeed("cat /etc/resolv.conf"))

@@ -4,11 +4,10 @@ let
   yaml = pkgs.formats.yaml { };
 
   # 使用方自己按约定算（和 system 侧一致，不依赖 module 暴露任何东西）：
-  #   netnsPath = /run/user-tun/netns/{name}（mihomo 进程要进的 netns 挂载点）
-  #   mixed-port = 7890（每 ns 的 loopback 私有，统一端口）
+  #   socksPort = socksPortBase(7890) + seq（seq 默认 = uid）
   derivedUsers = lib.mapAttrsToList (name: u: {
     name = name;
-    netnsPath = "/run/user-tun/netns/${name}";
+    socksPort = 7890 + u.uid;
   }) (lib.filterAttrs (_: u: u.isNormalUser == true) config.users.users);
 
   # ---------------------------------------------------------------------
@@ -18,8 +17,9 @@ let
     mode = "rule";
     log-level = "info";
     ipv6 = false;
-    mixed-port = 7890;   # 每 ns 私有统一端口；出站走 netns 默认路由（唯一 veth），无需 interface-name
+    mixed-port = u.socksPort;   # host 直连，各 user 不同端口；出站用 interface-name 绑定出站网卡（不回环）
     allow-lan = false;
+    interface-name = "eth1";
     dns = {
       enable = true;
       hosts = { "echo-${u.name}.example.test" = "192.168.50.2"; };
@@ -62,12 +62,10 @@ in
     lib.listToAttrs (map (u:
       lib.nameValuePair "user-tun-mihomo-${u.name}" {
         wantedBy = [ "multi-user.target" ];
-        after = [ "user-tun-netns.service" ];
-        requires = [ "user-tun-netns.service" ];
+        after = [ "network.target" ];
         serviceConfig = {
           User = u.name;
           StateDirectory = "user-tun-mihomo-${u.name}";
-          NetworkNamespacePath = u.netnsPath;
           ExecStart = "${lib.getExe pkgs.mihomo} -d /var/lib/user-tun-mihomo-${u.name} -f ${perUserMihomoConfig u}";
           Restart = "on-failure";
         };
