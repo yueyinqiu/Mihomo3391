@@ -59,7 +59,7 @@ in
   config = mkIf cfg.enable {
     systemd.services.single-tun-singbox = {
       wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" ];
+      after = [ "network-online.target" ];
       serviceConfig = {
         DynamicUser = true;
         ExecStart = "${pkgs.sing-box}/bin/sing-box run -c ${singBoxConfig}";
